@@ -5,34 +5,20 @@
     <input class="form-control" placeholder="imgrese" type="text" name="descripcion"  value="{{isset($gestion->descripcion)?$gestion->descripcion:""}}" id="descripcion">
     <br>
 <form >
-   {{--  <select name="fechagestion" id="fechagestion">
-        @foreach ($tipo_gestions as $tipo_gestion)
-        <option value="" > {{$tipo_gestion->nombre}}<option>
-        @endforeach
-    </select> --}}
+  
     <div id="sel" style="display:block;">    
     <label>SELECIONE EL TIPO DE GESTION:</label>
     <select class="ciudad">
-       {{--  @foreach ($tipo_gestions as $tipo_gestion)
-        <option value="{{$tipo_gestion->nombre}}" > {{$tipo_gestion->nombre}}<option>
-        @endforeach
-        --}}
         <option value="" selected disabled>SELECCIONE UNA OPCION</option>
-
-      
         <option value="INDUSTRIAL">INDUSTRIALES ,PETROLERAS</option>
-
         <option value="GOMERAS">GOMERAS,CASTAÑERAS,AGRICOLAS,GANADERAS</option>
         <option value="MINERAS">MINERAS</option>
-
         <option value="COMERCIAL">COMERCIAL ,BANCARIAS ,SERVICIOS,SEGUROS</option>
-
     </select>
 </div>
 
 </form>
     <div id="OtroTema" style="display:none;">	
-       {{--  <input type="text" name="temaotro"> --}}
        <label for="fecha_ini">FECHA DE INICIO</label> 
        <input class="form-control" placeholder="imgrese"type="date" name="fecha_ini" value="{{isset($gestion->fecha_fin)?$gestion->fecha_fin:""}}" id="fecha_ini">
        <br> 
@@ -89,9 +75,10 @@
     
     @section('js') 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        {{-- <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+        --}}
+      {{--   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
     

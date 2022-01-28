@@ -67,6 +67,8 @@ $(document).ready(function() {
 <div class="card">
     <div class="card-header">
         <strong> Razon Social:{{session('nombre')}}</strong> 
+        <strong> Razon Social:{{session('empresa_id')}}</strong> 
+        
         <br>
     <a class="btn btn-secondary" href="{{url('/empresas/create')}}">NUEVO  REGISTRO</a>
     </div>
@@ -99,7 +101,7 @@ $(document).ready(function() {
         <tbody>
             @foreach( $empresas as $empresa)
             <tr>
-                <td> <p class="font-italic "> {{ $empresa->id}}</p></td>
+                <td> <p class="font-italic "> {{ $empresa->idEmpresa}}</p></td>
                 <td> 
                 <img src="{{Storage::url($empresa->logo)}}" width="100" alt="">    
                 </td>

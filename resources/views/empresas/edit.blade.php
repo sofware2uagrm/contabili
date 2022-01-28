@@ -45,15 +45,6 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-/*  document.getElementById("file").addEventListener('change',cambiarImage);
-  function cambiarImagen(event){
-      var file=event.target.files[0];
-      var reader =new FileReader();
-   reader.onload=(event)=>{
-          document.getElementBylId("picture").setAttribute('scr',event.target.result);
-        
-    }reader.readerAsDataURL(file);
-} */
 
 function readURL(input) {
   if (input.files && input.files[0]) { //Revisamos que el input tenga contenido
@@ -66,11 +57,8 @@ function readURL(input) {
     reader.readAsDataURL(input.files[0]);
   }
 }
-
 $("#imgInp").change(function() { //Cuando el input cambie (se cargue un nuevo archivo) se va a ejecutar de nuevo el cambio de imagen y se verá reflejado.
   readURL(this);
 });
 </script>
-
-
 @endsection

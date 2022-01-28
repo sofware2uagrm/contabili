@@ -11,9 +11,8 @@ class EmpresaController extends Controller
 { public function index()
     {
         $empresas=Empresa::where('idUser','=', Auth::user()->id)->get();
-     
         return view('empresas.index',compact('empresas'));
-        //
+
     }
     
 
@@ -28,12 +27,11 @@ class EmpresaController extends Controller
              $empresa= request()->except('_token');
         $request->validate([
             'razonsocial'=>'required',
-            'licencia'=>'required',
+           // 'licencia'=>'required',
             'nit'=>'required',
             'telefono'=>'required',
             'ciudad'=>'required',
             ]);   
-       // return $request->hasFile('logo');
             if($request->hasFile('logo')){
                 $empresa['logo']=$request->file('logo')->store('uploads','public');
         }
@@ -41,22 +39,16 @@ class EmpresaController extends Controller
             $empresa['logo']=null;
         }
         $empresa['idUser']=  Auth::user()->id;
-    
-        Empresa::insert($empresa);
-
-//        return response()->json($datosEmpleado);
+            Empresa::insert($empresa);
+//       return response()->json($datosEmpleado);
         return redirect()->route('empresas.index')->with('mensaje','Empleado agregado con éxito');  
-   
-    
-    }
+   }
    
 
 
     public function show(Empresa $empresa)
-    { //return $empresa;
-    
-        session([
-            'empresa_id'=> "$empresa->id",
+    {   session([
+            'empresa_id'=> "$empresa->idEmpresa",
             'nombre'=>"$empresa->razonsocial"
         ]);
     return  redirect()->route('empresas.index');
@@ -64,16 +56,17 @@ class EmpresaController extends Controller
 
 
     public function edit(Empresa $empresa)
-    {
+    { 
         return view('empresas.edit', compact('empresa'));
     }
 
     public function update(Request $request, Empresa $empresa)
-    {
-         $datosEmpresa= request()->except(['_token','_method']);
-
+     {  
+            $datosEmpresa= request()->except(['_token','_method']);
+           // return $datosEmpresa;
+            print ($empresa);
+            //  $empresa=Empresa::findOrFail($empresa->idEmpresa);
         if($request->hasFile('logo')){
-            $empresa=Empresa::findOrFail($empresa->id);
             Storage::delete('public/'.$empresa->logo);
             $datosEmpresa['logo']=$request->file('logo')->store('uploads','public');
         }
@@ -81,19 +74,19 @@ class EmpresaController extends Controller
             $empresa['logo']=null;
         }
 
-        Empresa::where('id','=',$empresa->id)->update($datosEmpresa);
-        $empresa=Empresa::findOrFail($empresa->id);
+        Empresa::where('idEmpresa','=',$empresa->idEmpresa)->update($datosEmpresa);
+        $empresa=Empresa::findOrFail($empresa->idEmpresa);
         return view('empresas.edit', compact('empresa'));
     }
  
 
     public function destroy(Empresa $empresa)
     {
-        $empresas=Empresa::findOrFail($empresa->id);
+        $empresas=Empresa::findOrFail($empresa->idEmpresa);
         if(Storage::delete('public/'.$empresas->logo)){
 
         }
-        Empresa::destroy($empresa->id);
+        Empresa::destroy($empresa->idEmpresa);
        
         return redirect()->route('empresas.index')->with('mensaje','Empleado borrado');
  
