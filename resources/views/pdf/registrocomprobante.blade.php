@@ -1,137 +1,220 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE>
+<html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>pdf</title>
+    <title>Reporte</title>
     <style>
         body {
-        /*position: relative;*/
-        /*width: 16cm;  */
-        /*height: 29.7cm; */
-        /*margin: 0 auto; */
-        /*color: #555555;*/
-        /*background: #FFFFFF; */
+       
         font-family: Arial, sans-serif;
         font-size: 14px;
-        /*font-family: SourceSansPro;*/
-        }
-        #logoEmpresa{
-        float: left;
-        margin-top: 1%;
-        margin-left: 2%;
-        margin-right: 2%;
+        
         }
         #datos{
         float: left;
         margin-top: 0%;
         margin-left: 2%;
         margin-right: 2%;
-        /*text-align: justify;*/
+        
         }
         #encabezado{
         text-align: left;
-        margin-left: 10%;
-        margin-right: 35%;
-        font-size: 15px;
+        margin-left: 0%;
+        margin-right: 0%;
+        font-size: 13px;
         }
-        .title {
-            text-align: center;
-        }
-        #comprobanteder{
+        #encabezado1{
         text-align: right;
+        margin-left: 0%;
+        margin-right: 0%;
+        font-size: 13px;
         }
-        #comprobanteizq{
+        
+        section{
+        clear: left;
+        }
+        #cliente{
         text-align: left;
         }
-        #facomprobante{
+        #facliente{
         width: 40%;
         border-collapse: collapse;
         border-spacing: 0;
         margin-bottom: 15px;
 
         }
-        .body{
-            padding:5px;
-            margin: 5px;
+        #fac, #fv, #fa{
+        color: #FFFFFF;
+        font-size: 15px;
         }
-        .container{
-            width: 100%;
-            border: solid 1px #000
+        #facliente thead{
+        padding: 20px;
+        /* background: #2183E3; */
+        text-align: left;
+        border-bottom: 10px solid #FFFFFF;
         }
-        .row{
-            margin:5px;
-            width: 100%;
-
-            /* Example */
-            /* border-top: solid 1px #0ff; */
-        }
-
-    </style>
-</head>
-<body>
-    <p id="comprobanteizq">      
-        <br>  
-        <strong>Empresa : </strong> 
-        {{empresaid($comprobante->idEmpresa)->razonsocial}}
-        <br>
-        <strong>Direccion : </strong> 
-        {{empresaid($comprobante->idEmpresa)->direccion}}
-
-    </p>
-    <p id="comprobanteder">
        
-            <strong>Fecha : </strong> 
-                {{ $comprobante->fecha  }}
-            <br>
-            <strong>T. C. :     </strong>
-                {{$comprobante->tc}}
-            <br>
-            <strong>NIT : </strong>
-           {{empresaid($comprobante->idEmpresa)->nit}}
-            <br>
-            <strong>Usuario</strong>
+        #facarticulo{
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin-bottom: 15px;
+        border:left;
+        text-align: center;
+        }
+        #facarticulo thead{
+        padding: 20px;
+        background: #000000;
+        text-align: center;
+        border-bottom: 1px solid #FFFFFF;
+        }
+        #centro{
+        text-align: center;
+        margin-left: 12%;
+        }
+        .Titulo{
+          text-align: center;
+        }
+        #total{
+          color :black ;
+          text-emphasis: solid;
+        }
+        #firmaizq{
+            text-align: left;
+            margin-left: 10%;
+        }
+        #firmcont{
+            text-align: left;
+            margin-left: 18%;
+        }
+        #firmadm{
+        text-align: center;
+        margin-left: 14%;
+        }
+        #subrayado{
+            text-decoration: underline;
+        }
+    </style>
+    <body>
+        <header>
+           
+            <div id="datos">
+                <p id="encabezado">
+                    <b></b>
+                    <br>EMPRESA : {{empresaid($comprobante->idEmpresa)->razonsocial}} </b>
+                    <br>DIRECCION : {{empresaid($comprobante->idEmpresa)->direccion}} </b>
+                    <br>GESTION : {{año()}} </b>
+                    <br>MES : {{mes()}} </b>
+                </p>
+            </div>
+            
+            <p id="encabezado1">
+            <br>FECHA :  {{ $comprobante->fecha  }}</b>
+            <br>TC :  {{$comprobante->tc}}</b>
+            <br>NIT :  {{empresaid($comprobante->idEmpresa)->nit}}</b>
+            <br>USUARIO :  
             @foreach (users() as $usuario)
             {{$usuario->name}}
-            @endforeach
-        
-    </p>
-    <div class="title">
-  
-                    <h2>COMPROBANTE DE {{comprobanteTipo($comprobante->idComprobanteTipo)->descripcion}}</h2>
-                    <p class="font-weight-light">NRO COMPROBANTE : {{$comprobante->numeroDocumento}}</p>
-                    
-          
-    </div>
-            <section>
-                <div>
-                    <table id="facomprobante">
-                        <thead>
-                            <tr>
-                                <th>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <br>
-                            <br>
-                            <br>
-                                <th><p  id="comprobante"><strong>CANCELADO A : </strong> 
-                                    <br>
-                                    {{ $comprobante->canceladoa }}
-                                    <br>
-                               <strong>POR CONCEPTO DE: </strong> 
-                                <br>
-                                {{ $comprobante->glosa }}
-                                <br>
-                                </p></th>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-   
-</body>
+            @endforeach</b>
+            </p>
+
+            <h2 class="Titulo">COMPROBANTE DE {{comprobanteTipo($comprobante->idComprobanteTipo)->descripcion}}</h2>
+            <h4 class="Titulo">NRO DE COMPROBANTE : {{$comprobante->numeroDocumento}}</h4>
+        </header>
+        <br>
+        <section>
+            <div>
+                <table id="facliente">
+                    <thead>
+                        <tr>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        
+                            <th><p id="cliente">CANCELADO A : <br>
+                              {{ $comprobante->canceladoa }}<br>
+                              POR CONCEPTO DE :<br>
+                              {{ $comprobante->glosa }}
+                            </p></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+
+        <section>
+            <div>
+                <table id="facarticulo" style="border: solid 1px rgb(0, 0, 0)">
+                    <thead >
+                        <tr id="fa">
+                            <th>CODIGOS</th>
+                            <th>DESCRIPCION</th>
+                            <th>DEBE Bs</th>
+                            <th>HABER Bs</th>
+                            <th>DEBE Sus</th>
+                            <th>HABER Sus</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach(detallecomprobante($comprobante->idComprobante)['asiento'] as $detalle)
+                        <tr>
+                            <td>{{$detalle->codigo}}</td>
+                            <td><b id="subrayado">{{CuentaPlane($detalle->idCuentaPlan)->descripcion}}</b><br><b>{{$detalle->glosa}}</b></td>
+                            <td>{{$detalle->debe}}</td>
+                            <td>{{$detalle->haber}}</td>
+                            <td>{{montoSus($comprobante->tc,$detalle->debe)}}</td>
+                            <td>{{montoSus($comprobante->tc,$detalle->haber)}}</td>
+                            
+                        </tr>
+                    @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            
+                            <td class="total">TOTALES : </td>
+                            <td>{{detallecomprobante($comprobante->idComprobante)['total_debes']}}</td>
+                            <td>{{detallecomprobante($comprobante->idComprobante)['total_habers']}}</td>
+                            <td>{{montoSus($comprobante->tc,detallecomprobante($comprobante->idComprobante)['total_debes'])}}</td>
+                            <td>{{montoSus($comprobante->tc,detallecomprobante($comprobante->idComprobante)['total_habers'])}}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+        <br>
+        <br>
+        <footer>
+            <div id="cliente">
+                <p><b>SON :  {{convertir(detallecomprobante($comprobante->idComprobante)['total_debes'])}} 00/100 BOLIVIANOS</b></p>
+            </div>
+        </footer>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+       
+        <footer>
+            <div id="cliente">
+                <p><br>_____________________</b><b id="centro">_____________________</b><b id="firmaizq">_____________________</b>
+                    <br><h4 id="datos">GERENTE GENERAL</h4></b><b id="firmadm">ADMINISTRACION<b></b><b id="firmcont">CONTABILIDAD</b>
+                </p>
+            </div>
+        </footer>
+       
+            
+            
+    </body>
 </html>

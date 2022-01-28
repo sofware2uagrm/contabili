@@ -25,7 +25,6 @@ class CreateComprobanteCuentaDetalleTable extends Migration
           
             $table->foreign('idCuentaPlan')->on('cuenta_plan')->references('idCuentaPlan')->onDelete('cascade');
             $table->foreign('idComprobante')->on('comprobante')->references('idComprobante')->onDelete('cascade');
-            
 
         });
     }

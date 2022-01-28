@@ -18,17 +18,7 @@
                         <div class="card border-primary">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Tipo Cambio</label>
-                                            <input type="number" readonly name="tc" id="tc" wire:model='tc'
-                                                class="form-control" placeholder="" aria-describedby="helpId">
-                                        
-                                        </div>
-                                        @error('tc')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Fecha</label>
@@ -108,6 +98,7 @@
                                   
                                 </div>
 
+
                                     <!-- Modal -->
                                     <div wire:ignore.self class="modal fade" id="modelIdEmpresa" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
@@ -118,8 +109,11 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                 </div>
+                                                
                                                 <div class="modal-body">
+                                                    
                                                     <table class="table">
+                                                      {{-- <input type="text" wire:model='searchempresa' class="form-control" style="border-radius : 50px" placeholder='Buscar'>--}} 
                                                         <thead class="thead-dark">
                                                         <tr>
                                                             <th>#</th>
@@ -203,7 +197,7 @@
                                     <div class="col-md-6 text-right">
                                         <!-- Button trigger modal -->
 
-                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelIdfacturarComprobante">
+                                        <button type="button" wire:click="iniciar_nuevo" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelIdfacturarComprobante">
                                             Agregar Nuevo <i class="fa fa-file" aria-hidden="true"></i>
                                         </button>
                                     
@@ -230,7 +224,7 @@
                                                             <div class="text-center">
                                                                 <p class="font-weight-bold"> DESEAS EMITIR FACTURA ?</p> 
                                                                 <button type="button" class="btn btn-success" wire:click='facturado(1)'>SI</button>
-                                                                <button type="button" class="btn btn-danger" wire:click='facturado(0)'>NO</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">NO</button>
                                                                 
                                                             </div>
                                                     @else
@@ -245,7 +239,7 @@
                                                                         
                                                                             <div class="col-md-4"> 
                                                                                 <div  class="form-group">
-                                                                            <label for="">Sucursal  {{$sucursal}}</label>
+                                                                            <label for="">Sucursal  </label>
                                                                                 <select class="form-control" name="sucursal" id="sucursal" wire:model=sucursal>  
                                                                             @if (is_null($sucursal))
                                                                             <option value="">Seleccione una opcion</option>
@@ -259,13 +253,13 @@
                                                                         </div>
                                                                         <div class="col-md-4">
                                                                             <div class="form-group">
-                                                                                <label form="">Nro Factura {{$nro_factura}}</label>
+                                                                                <label form="">Nro Factura </label>
                                                                         <input type="number" class="form-control" name="nro_factura" id="nro_factura"  wire:model='nro_factura' aria-describedby="helpId" placeholder="">
                                                                         </div>
                                                                         </div>
                                                                         <div class="col-md-4">
                                                                             <div class="form-group">
-                                                                                <label form="">NIT{{$nit_factura}}</label>
+                                                                                <label form="">NIT</label>
                                                                                 <input type="number" class="form-control" name="nit_factura" id="nit_factura" wire:model='nit_factura' aria-describedby="helpId" placeholder="">
                                                                             </div>
                                                                         </div>
@@ -273,7 +267,7 @@
                                                                     <div class="row">
                                                                         <div class="col-md-4">
                                                                             <div class="form-group">
-                                                                                <label form="">Nro Autorizacion {{$nroautorizacion}}</label>
+                                                                                <label form="">Nro Autorizacion </label>
                                                                                 <input type="number" class="form-control" name="nroautorizacion" 
                                                                                 id="nroautorizacion" wire:model='nroautorizacion' aria-describedby="helpId" placeholder="">
                                                                             </div>
@@ -281,13 +275,13 @@
                                                                         </div>
                                                                         <div class="col-md-4">
                                                                             <div class="form-group">
-                                                                                <label form="">Cod. Control {{$codcontrol}}</label>
+                                                                                <label form="">Cod. Control </label>
                                                                                 <input type="number" class="form-control" name="codcontrol" id="codcontrol" wire:model='codcontrol' aria-describedby="helpId" placeholder="">
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-4">
                                                                             <div class="form-group">
-                                                                                <label form="">Proveedor{{$proveedor}}</label>
+                                                                                <label form="">Proveedor</label>
                                                                                 <input type="text" class="form-control" name="proveedor" id="proveedor" wire:model='proveedor' aria-describedby="helpId" placeholder="">
                                                                         </div>
                                                                     </div>
@@ -296,19 +290,19 @@
                                                                     <div class="row">
                                                                         <div class="col-md-4">
                                                                             <div class="form-group">
-                                                                                <label form="">Total Factura{{$total_factura}}</label>
+                                                                                <label form="">Total Factura</label>
                                                                                 <input type="number" class="form-control" name="total_factura" id="total_factura"wire:model='total_factura' aria-describedby="helpId" placeholder="">
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-4">
                                                                             <div class="form-group">
-                                                                                <label form="">ICE {{$ice}}</label>
+                                                                                <label form="">ICE </label>
                                                                                 <input type="number" class="form-control" name="ice" id="ice"wire:model='ice' aria-describedby="helpId" placeholder="">
                                                                             </div>  
                                                                         </div>
                                                                         <div class="col-md-4">
                                                                             <div class="form-group">
-                                                                                <label form="">Importes Excentos {{$importes_excentos}}</label>
+                                                                                <label form="">Importes Excentos </label>
                                                                                 <input type="number" class="form-control" name="importes_excentos" id="importes_excentos"wire:model='importes_excentos' aria-describedby="helpId" placeholder="">
                                                                             </div>  
                                                                     </div>
@@ -320,7 +314,7 @@
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <div class="form-group">
-                                                                        <label form="">Descuentos {{$descuentos}}</label>
+                                                                        <label form="">Descuentos </label>
                                                                         <input type="number" class="form-control" name="descuentos" id="descuentos"wire:model='descuentos' aria-describedby="helpId" placeholder="">
                                                                     </div>  
                                                             </div>
@@ -335,7 +329,7 @@
                                                             <div class="col-md-2">
                                                                 <div class="form-group">
                                                                     <!-- Button trigger modal -->
-                                                                    <button type="button" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#modelIdPlan" >
+                                                                    <button type="button" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#modelIdPlanusea" >
                                                                     Plan de cuentas
                                                                     </button>
                                                                 </div>
@@ -343,7 +337,7 @@
                                                                 
                                                                     
                                                                     <!-- Modal -->
-                                                                    <div wire:ignore.self class="modal fade" id="modelIdPlan" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                                                    <div wire:ignore.self class="modal fade" id="modelIdPlanusea" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
                                                                         <div class="modal-dialog" role="document">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
@@ -373,107 +367,107 @@
                                                                                                         @if (count(nivel_2_cuentas($cuenta1->idCuentaPlanTipo))>0)
                                                                                                             
                                                                     
-                                                                                                            @foreach (nivel_2_cuentas($cuenta1->idCuentaPlanTipo) as $key2 => $cuenta2)
-                                                                                                                <div class="border p-1">
-                                                                                                                    {{-- FINALIZADO --}}
-                                                                                                                    <div class="row">
-                                                                                                                        <div class="col-md-5"><strong> {{$key1+1}}0{{$key2+1}} </strong></div>
-                                                                                                                        <div class="col-md-4"><strong>{{$cuenta2->descripcion}}</strong></div>
-                                                                                                                        <div class="col-md-3 text-center">
-                                                                                                                
-                                                                                                                            <a class="btn btn-sm btn-primary" data-toggle="collapse" href="#key_2{{$key1+1}}0{{$key2+1}}" aria-expanded="false" aria-controls="key_2{{$key1+1}}0{{$key2+1}}">
-                                                                                                                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                                                                                                                            </a>
-                                                                                                                        </div>
+                                                                                                        @foreach (nivel_2_cuentas($cuenta1->idCuentaPlanTipo) as $key2 => $cuenta2)
+                                                                                                            <div class="border p-1">
+                                                                                                                {{-- FINALIZADO --}}
+                                                                                                                <div class="row">
+                                                                                                                    <div class="col-md-5"><strong> {{$key1+1}}0{{$key2+1}} </strong></div>
+                                                                                                                    <div class="col-md-4"><strong>{{$cuenta2->descripcion}}</strong></div>
+                                                                                                                    <div class="col-md-3 text-center">
+                                                                                                            
+                                                                                                                        <a class="btn btn-sm btn-primary" data-toggle="collapse" href="#key_2{{$key1+1}}0{{$key2+1}}" aria-expanded="false" aria-controls="key_2{{$key1+1}}0{{$key2+1}}">
+                                                                                                                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                                                                                                        </a>
                                                                                                                     </div>
-                                                                                                                    {{-- FINALIZADO --}}
-                                                                                                                    <div wire:ignore.self class="collapse" id="key_2{{$key1+1}}0{{$key2+1}}">
-                                                                                                                        @if (count(nivel_3_cuentas($cuenta1->idCuentaPlanTipo,$cuenta2->idCuentaPlan))>0)
-                                                                                                                            @foreach (nivel_3_cuentas($cuenta1->idCuentaPlanTipo,$cuenta2->idCuentaPlan) as $key3 => $cuenta3)
-                                                                                                                                <div class="border p-1">
-                                                                        
-                                                                                                                                    <div class="row">
-                                                                                                                                        {{-- {{$cuenta1->idCuentaPlanTipo}}.&nbsp; {{$cuenta3->idCuentaPlan}}. --}}
-                                                                                                                                        <div class="col-md-5">{{$key1+1}}0{{$key2+1}}0{{$key3+1 }}</div>
-                                                                                                                                        <div class="col-md-4">{{$cuenta3->descripcion}}</div>
-                                                                                                                                        <div class="col-md-3 text-center">
-                                                                        
-                                                                                                                                            <a class="btn btn-sm btn-primary" data-toggle="collapse" href="#{{$key1+1}}0{{$key2+1}}0{{$key3+1 }}" aria-expanded="false" aria-controls="{{$key1+1}}0{{$key2+1}}0{{$key3+1 }}">
-                                                                                                                                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                                                                                                                                            </a>
-                                                                        
-                                                                                                                                        </div>
-                                                                        
+                                                                                                                </div>
+                                                                                                                {{-- FINALIZADO --}}
+                                                                                                                <div wire:ignore.self class="collapse" id="key_2{{$key1+1}}0{{$key2+1}}">
+                                                                                                                    @if (count(nivel_3_cuentas($cuenta1->idCuentaPlanTipo,$cuenta2->idCuentaPlan))>0)
+                                                                                                                        @foreach (nivel_3_cuentas($cuenta1->idCuentaPlanTipo,$cuenta2->idCuentaPlan) as $key3 => $cuenta3)
+                                                                                                                            <div class="border p-1">
+                                                                    
+                                                                                                                                <div class="row">
+                                                                                                                                    {{-- {{$cuenta1->idCuentaPlanTipo}}.&nbsp; {{$cuenta3->idCuentaPlan}}. --}}
+                                                                                                                                    <div class="col-md-5">{{$key1+1}}0{{$key2+1}}0{{$key3+1 }}</div>
+                                                                                                                                    <div class="col-md-4">{{$cuenta3->descripcion}}</div>
+                                                                                                                                    <div class="col-md-3 text-center">
+                                                                    
+                                                                                                                                        <a class="btn btn-sm btn-primary" data-toggle="collapse" href="#{{$key1+1}}0{{$key2+1}}0{{$key3+1 }}" aria-expanded="false" aria-controls="{{$key1+1}}0{{$key2+1}}0{{$key3+1 }}">
+                                                                                                                                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                                                                                                                        </a>
+                                                                    
                                                                                                                                     </div>
-                                                                                                                                    <div wire:ignore.self class="collapse" id="{{$key1+1}}0{{$key2+1}}0{{$key3+1 }}">
-                                                                                                                                    @if (count(nivel_4_cuentas($cuenta1->idCuentaPlanTipo,$cuenta3->idCuentaPlan))>0)
-                                                                                                                                        @foreach (nivel_4_cuentas($cuenta1->idCuentaPlanTipo,$cuenta3->idCuentaPlan) as $key4 => $cuenta4)
-                                                                                                                                            <div class="border p-1">
-                                                                        
-                                                                                                                                                <div class="row">
-                                                                                                                                                    <div class="col-md-5"> {{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}</div>
-                                                                                                                                                    <div class="col-md-4">{{$cuenta4->descripcion}}</div>
-                                                                                                                                                    <div class="col-md-3 text-center">
-                                                                                                                        
-                                                                                                                                                        <a class="btn btn-sm btn-primary" data-toggle="collapse" href="#{{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}" aria-expanded="false" aria-controls="{{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}">
-                                                                                                                                                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
-                                                                                                                                                        </a>
-                                                                                                                                                    </div>
+                                                                    
+                                                                                                                                </div>
+                                                                                                                                <div wire:ignore.self class="collapse" id="{{$key1+1}}0{{$key2+1}}0{{$key3+1 }}">
+                                                                                                                                @if (count(nivel_4_cuentas($cuenta1->idCuentaPlanTipo,$cuenta3->idCuentaPlan))>0)
+                                                                                                                                    @foreach (nivel_4_cuentas($cuenta1->idCuentaPlanTipo,$cuenta3->idCuentaPlan) as $key4 => $cuenta4)
+                                                                                                                                        <div class="border p-1">
+                                                                    
+                                                                                                                                            <div class="row">
+                                                                                                                                                <div class="col-md-5"> {{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}</div>
+                                                                                                                                                <div class="col-md-4">{{$cuenta4->descripcion}}</div>
+                                                                                                                                                <div class="col-md-3 text-center">
+                                                                                                                    
+                                                                                                                                                    <a class="btn btn-sm btn-primary" data-toggle="collapse" href="#{{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}" aria-expanded="false" aria-controls="{{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}">
+                                                                                                                                                        <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                                                                                                                                    </a>
                                                                                                                                                 </div>
-                                                                        
-                                                                                                                                                <div wire:ignore.self class="collapse" id="{{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}">
-                                                                                                                                                    @if (count(nivel_5_cuentas($cuenta1->idCuentaPlanTipo,$cuenta4->idCuentaPlan))>0)
-                                                                                                                                                        @foreach (nivel_5_cuentas($cuenta1->idCuentaPlanTipo,$cuenta4->idCuentaPlan) as $key5 => $cuenta5)
-                                                                                                                                                            <div class="border p-1">
-                                                                                                                                                            
-                                                                                                                                                                <div class="row">
-                                                                                                                                                                    <div class="col-md-5"> {{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}0{{$key5+1}}</div>
-                                                                                                                                                                    <div class="col-md-5">{{$cuenta5->descripcion}}</div>
-                                                                                                                                                                    <div class="col-md-2 text-center">
-                                                                                                                                                            
-                                                                                                                                                                    <button wire:click='seleccionar_cuenta_plan({{$key1+1}},{{$key2+1}},{{$key3+1}},{{$key4+1}},{{$key5+1}},{{$cuenta5->idCuentaPlan}},0)' class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
-                                                                                                                                                                    
-                                                        
-                                                                                                                                                                    </div>
-                                                                                                                                                                </div>
-                                                                                                                                                                
-                                                                                                                                                            </div>
-                                                                                                                                                        
-                                                                                                                                                        @endforeach
-                                                                                                                                                    @else
-                                                                                                                                                            <div class="alert alert-primary text-center" role="alert">
-                                                                                                                                                                <strong>No existen cuentas agregadas</strong>
-                                                                                                                                                            </div>
-                                                                                                                                                    @endif
-                                                                                                                                                </div>
-                                                                                                                                            
                                                                                                                                             </div>
-                                                                        
-                                                                                                                                            
-                                                                                                                                        @endforeach
-                                                                                                                                    @else
-                                                                                                                                        <div class="alert alert-primary text-center" role="alert">
-                                                                                                                                            <strong>No existen cuentas agregadas</strong>
+                                                                    
+                                                                                                                                            <div wire:ignore.self class="collapse" id="{{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}">
+                                                                                                                                                @if (count(nivel_5_cuentas($cuenta1->idCuentaPlanTipo,$cuenta4->idCuentaPlan))>0)
+                                                                                                                                                    @foreach (nivel_5_cuentas($cuenta1->idCuentaPlanTipo,$cuenta4->idCuentaPlan) as $key5 => $cuenta5)
+                                                                                                                                                        <div class="border p-1">
+                                                                                                                                                        
+                                                                                                                                                            <div class="row">
+                                                                                                                                                                <div class="col-md-5"> {{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}0{{$key5+1}}</div>
+                                                                                                                                                                <div class="col-md-5">{{$cuenta5->descripcion}}</div>
+                                                                                                                                                                <div class="col-md-2 text-center">
+                                                                                                                                                        
+                                                                                                                                                                <button wire:click='seleccionar_cuenta_plan({{$key1+1}},{{$key2+1}},{{$key3+1}},{{$key4+1}},{{$key5+1}},{{$cuenta5->idCuentaPlan}},0)' class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                                                                                                                                                
+                                                    
+                                                                                                                                                                </div>
+                                                                                                                                                            </div>
+                                                                                                                                                            
+                                                                                                                                                        </div>
+                                                                                                                                                    
+                                                                                                                                                    @endforeach
+                                                                                                                                                @else
+                                                                                                                                                        <div class="alert alert-primary text-center" role="alert">
+                                                                                                                                                            <strong>No existen cuentas agregadas</strong>
+                                                                                                                                                        </div>
+                                                                                                                                                @endif
+                                                                                                                                            </div>
+                                                                                                                                        
                                                                                                                                         </div>
-                                                                                                                                    @endif
-                                                                                                                                </div>
-                                                                        
-                                                                        
-                                                                                                                                </div>
-                                                                                                                            @endforeach
-                                                                                                                        @else
-                                                                                                                            <div class="row">
-                                                                                                                                <div class="col-12">
+                                                                    
+                                                                                                                                        
+                                                                                                                                    @endforeach
+                                                                                                                                @else
                                                                                                                                     <div class="alert alert-primary text-center" role="alert">
                                                                                                                                         <strong>No existen cuentas agregadas</strong>
                                                                                                                                     </div>
+                                                                                                                                @endif
+                                                                                                                            </div>
+                                                                    
+                                                                    
+                                                                                                                            </div>
+                                                                                                                        @endforeach
+                                                                                                                    @else
+                                                                                                                        <div class="row">
+                                                                                                                            <div class="col-12">
+                                                                                                                                <div class="alert alert-primary text-center" role="alert">
+                                                                                                                                    <strong>No existen cuentas agregadas</strong>
                                                                                                                                 </div>
                                                                                                                             </div>
-                                                                                                                        @endif
-                                                                                                                    </div>
-                                                                        
+                                                                                                                        </div>
+                                                                                                                    @endif
                                                                                                                 </div>
-                                                                                                            @endforeach
+                                                                    
+                                                                                                            </div>
+                                                                                                        @endforeach
                                                                                                         @else
                                                                                                             <div class="row">
                                                                                                                 <div class="col-12">
@@ -513,7 +507,7 @@
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <div class="form-group">
-                                                                    <button type="button" wire:click="atras"class="btn btn-link">ATRAS</button>
+                                                                    <button type="button" wire:click="atras"class="btn btn-link">REGRESAR AL INICIO</button>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
@@ -749,7 +743,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         
-                                                                    <button type="button" wire:click="regresar_emitir_factura"class="btn btn-sm btn-link">REGRESAR</button>
+                                                                    <button type="button" wire:click="regresar_emitir_factura"class="btn btn-sm btn-link">ATRAS</button>
                                                                     
                                                                     </div>
                                                                     <div class="col-md-6">
@@ -990,7 +984,7 @@
                                                                 
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <button wire:click="add_asiento"class="btn btn-sm btn-success">GUARDAR COMPROBANTE</button>
+                                                                            <button wire:click="update_add_asiento"class="btn btn-sm btn-success"> Añadir Nuevo</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1029,7 +1023,7 @@
                                         </thead>
                                         <tbody>
                                             
-                                            @foreach (get_detalle($idComprobante) as $key =>  $asiento)
+                                            @foreach (get_detalle($idComprobante)['detalle'] as $key =>  $asiento)
                                                 <tr>
                                                     <td>{{$asiento->codigo}}</td>
                                                     <td> {{CuentaPlane($asiento->idCuentaPlan)->descripcion }}</td>     
@@ -1039,117 +1033,269 @@
                                                     <td>{{montoSus($tc,$asiento->debe)}}</td>  
                                                     <td>{{montoSus($tc,$asiento->haber)}}</td> 
                                                     <td><!-- Button trigger modal -->
-                                                    <button type="button" wire:click='show_asiento'class="btn btn-success btn-sm" data-toggle="modal" data-target="#modelIdEditarasiento" >
-                                                    <i class="fas fa-edit"> </i>
-                                                    </button>
-                                                    
-                                                    <!-- Modal -->
-                                                    <div wire:ignore.self class="modal fade" id="modelIdEditarasiento" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-                                                        <div class="modal-dialog " role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Modificar Asiento</h5>
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
+                                                        <button type="button" wire:click='show_asiento({{$asiento->idComprobanteCuentaDetalle}})'class="btn btn-success btn-sm" data-toggle="modal" data-target="#modelIdEditarasiento" >
+                                                            <i class="fas fa-edit"> </i>
+                                                            </button>
+                                                            
+                                                            <!-- Modal -->
+                                                            <div wire:ignore.self class="modal fade" id="modelIdEditarasiento" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                                                <div class="modal-dialog modal-lg " role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">Modificar Asiento</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <!-- Button trigger modal -->
+                                                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modelIdPC">
+                                                                              Plan de Cuentas
+                                                                            </button>
+                                                                            
+                                                                            <!-- Modal -->
+                                                                            <div wire:ignore.self class="modal fade" id="modelIdPC" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                                                                <div class="modal-dialog" role="document">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h5 class="modal-title">Plan de Cuentas</h5>
+                                                                                               
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <div class="card-body">
+                                                                                                @foreach (nivel_1_cuentas() as $key1 => $cuenta1)
+                                                                                                    <div class="border p-1">
+                                                                                                        {{-- FINALIZADO --}}
+                                                                                                        <div class="row">
+                                                                                                            {{-- <div class="col-md-5">{{ $cuenta1->idCuentaPlanTipo }}</div> --}}
+                                                                                                            <div class="col-md-5"> <strong><span style="text-transform: uppercase;  "> {{ $key1+1 }}. </span></strong></div>
+                                                                                                            <div class="col-md-4"><strong> <span style="text-transform: uppercase; "> {{ $cuenta1->descripcion }} </span></strong></div>
+                                                                                                            <div class="col-md-3 text-right">
+                                                                            
+                                                                                                                <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#key_11{{$key1}}" aria-expanded="false" aria-controls="key_11{{$key1}}">
+                                                                                                                    <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                                                                                                </button>
+                                                                                                            
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        {{-- FINALIZADO --}}
+                                                                                                        <div wire:ignore.self class="collapse" id="key_11{{$key1}}">
+                                                                                                            <div class="card card-body">
+                                                                                                                @if (count(nivel_2_cuentas($cuenta1->idCuentaPlanTipo))>0)
+                                                                                                                    
+                                                                            
+                                                                                                                @foreach (nivel_2_cuentas($cuenta1->idCuentaPlanTipo) as $key2 => $cuenta2)
+                                                                                                                    <div class="border p-1">
+                                                                                                                        {{-- FINALIZADO --}}
+                                                                                                                        <div class="row">
+                                                                                                                            <div class="col-md-5"><strong> {{$key1+1}}0{{$key2+1}} </strong></div>
+                                                                                                                            <div class="col-md-4"><strong>{{$cuenta2->descripcion}}</strong></div>
+                                                                                                                            <div class="col-md-3 text-center">
+                                                                                                                        
+                                                                                                                                <a class="btn btn-sm btn-primary" data-toggle="collapse" href="#key_22{{$key1+1}}0{{$key2+1}}" aria-expanded="false" aria-controls="key_22{{$key1+1}}0{{$key2+1}}">
+                                                                                                                                    <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                                                                                                                </a>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                        {{-- FINALIZADO --}}
+                                                                                                                        <div wire:ignore.self class="collapse" id="key_22{{$key1+1}}0{{$key2+1}}">
+                                                                                                                            @if (count(nivel_3_cuentas($cuenta1->idCuentaPlanTipo,$cuenta2->idCuentaPlan))>0)
+                                                                                                                                @foreach (nivel_3_cuentas($cuenta1->idCuentaPlanTipo,$cuenta2->idCuentaPlan) as $key3 => $cuenta3)
+                                                                                                                                    <div class="border p-1">
+                                                                            
+                                                                                                                                        <div class="row">
+                                                                                                                                            {{-- {{$cuenta1->idCuentaPlanTipo}}.&nbsp; {{$cuenta3->idCuentaPlan}}. --}}
+                                                                                                                                            <div class="col-md-5">{{$key1+1}}0{{$key2+1}}0{{$key3+1 }}</div>
+                                                                                                                                            <div class="col-md-4">{{$cuenta3->descripcion}}</div>
+                                                                                                                                            <div class="col-md-3 text-center">
+                                                                            
+                                                                                                                                                <a class="btn btn-sm btn-primary" data-toggle="collapse" href="#key_33{{$key1+1}}0{{$key2+1}}0{{$key3+1 }}" aria-expanded="false" aria-controls="key_33{{$key1+1}}0{{$key2+1}}0{{$key3+1 }}">
+                                                                                                                                                    <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                                                                                                                                </a>
+                                                                            
+                                                                                                                                            </div>
+                                                                            
+                                                                                                                                        </div>
+                                                                                                                                        <div wire:ignore.self class="collapse" id="key_33{{$key1+1}}0{{$key2+1}}0{{$key3+1 }}">
+                                                                                                                                        @if (count(nivel_4_cuentas($cuenta1->idCuentaPlanTipo,$cuenta3->idCuentaPlan))>0)
+                                                                                                                                            @foreach (nivel_4_cuentas($cuenta1->idCuentaPlanTipo,$cuenta3->idCuentaPlan) as $key4 => $cuenta4)
+                                                                                                                                                <div class="border p-1">
+                                                                            
+                                                                                                                                                    <div class="row">
+                                                                                                                                                        <div class="col-md-5"> {{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}</div>
+                                                                                                                                                        <div class="col-md-4">{{$cuenta4->descripcion}}</div>
+                                                                                                                                                        <div class="col-md-3 text-center">
+                                                                                                                                
+                                                                                                                                                            <a class="btn btn-sm btn-primary" data-toggle="collapse" href="#key_44{{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}" aria-expanded="false" aria-controls="key_44{{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}">
+                                                                                                                                                                <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                                                                                                                                            </a>
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+                                                                            
+                                                                                                                                                    <div wire:ignore.self class="collapse" id="key_44{{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}">
+                                                                                                                                                        @if (count(nivel_5_cuentas($cuenta1->idCuentaPlanTipo,$cuenta4->idCuentaPlan))>0)
+                                                                                                                                                            @foreach (nivel_5_cuentas($cuenta1->idCuentaPlanTipo,$cuenta4->idCuentaPlan) as $key5 => $cuenta5)
+                                                                                                                                                                <div class="border p-1">
+                                                                                                                                                                
+                                                                                                                                                                    <div class="row">
+                                                                                                                                                                        <div class="col-md-5"> {{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}0{{$key5+1}}</div>
+                                                                                                                                                                        <div class="col-md-5">{{$cuenta5->descripcion}}</div>
+                                                                                                                                                                        <div class="col-md-2 text-center">
+                                                                                                                                                                
+                                                                                                                                                                            <button wire:click='seleccionar_asiento({{$key1+1}},{{$key2+1}},{{$key3+1}},{{$key4+1}},{{$key5+1}},{{$cuenta5->idCuentaPlan}})' class="btn btn-sm btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                                                                                                                                                            
+                                                                        
+                                                                                                                                                                        </div>
+                                                                                                                                                                    </div>
+                                                                                                                                                                    
+                                                                                                                                                                </div>
+                                                                                                                                                                
+                                                                                                                                                            @endforeach
+                                                                                                                                                        @else
+                                                                                                                                                                <div class="alert alert-primary text-center" role="alert">
+                                                                                                                                                                    <strong>No existen cuentas agregadas</strong>
+                                                                                                                                                                </div>
+                                                                                                                                                        @endif
+                                                                                                                                                    </div>
+                                                                                                                                                
+                                                                                                                                                </div>
+                                                                            
+                                                                                                                                                
+                                                                                                                                            @endforeach
+                                                                                                                                        @else
+                                                                                                                                            <div class="alert alert-primary text-center" role="alert">
+                                                                                                                                                <strong>No existen cuentas agregadas</strong>
+                                                                                                                                            </div>
+                                                                                                                                        @endif
+                                                                                                                                    </div>
+                                                                            
+                                                                            
+                                                                                                                                    </div>
+                                                                                                                                @endforeach
+                                                                                                                            @else
+                                                                                                                                <div class="row">
+                                                                                                                                    <div class="col-12">
+                                                                                                                                        <div class="alert alert-primary text-center" role="alert">
+                                                                                                                                            <strong>No existen cuentas agregadas</strong>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                            @endif
+                                                                                                                        </div>
+                                                                            
+                                                                                                                    </div>
+                                                                                                                @endforeach
+                                                                                                                @else
+                                                                                                                    <div class="row">
+                                                                                                                        <div class="col-12">
+                                                                                                                            <div class="alert alert-primary text-center" role="alert">
+                                                                                                                                <strong>No existen cuentas agregadas</strong>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                @endif
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        
+                                                                                                    </div>
+                                                                                                @endforeach
+                                                                            
+                                                                                            </div>
+                                                                        
+                                                                        
+                                                                        
+                                                                                        </div>
+                                                                                        
+                                                                                        <div class="modal-footer">
+                                                                                            
+                                                                                            
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    
+                                                                                </div>
+                                                                                
+                                                                            </div>
+                                                                            
+                                                                           
+                                                                        
+                                                                        
+                                                                            <div class="row">
+                                                                                <div class="col-10">
+                                                                                    <label for="">Codigo</label>
+                                                                                    <input type="text" class="form-control" name="codigo" id="codigo"
+                                                                                    wire:model='codigo' aria-describedby="helpId" placeholder="">{{$codigo}}
+                                                                                </div>
+                                                                            </div>
+                                                                            <br>
+                                                                            <div class="row">
+                                                                                <div class="col-10">
+                                                                                    @if (!is_null($idCuentaPlan_edit))
+                                                                                    <label for="">Cuenta {{CuentaPlane($idCuentaPlan_edit)->descripcion}}</label>
+                                                                                    <input type="text" class="form-control" name="idCuentaPlan" id="idCuentaPlan"
+                                                                                     wire:model='idCuentaPlan' aria-describedby="helpId" placeholder="{{ CuentaPlane($idCuentaPlan_edit)->descripcion}}">  
+                                                                                    @endif
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                            <br>
+                                                                            <div class="row">
+                                                                                <div class="col-10">
+                                                                                    <label for="">Glosa Individual</label>
+                                                                                    <input type="text" class="form-control" name="glosa" id="glosa"
+                                                                                    wire:model='glosa' aria-describedby="helpId" placeholder="">
+                                                                                </div>
+                                                                            </div>
+                                                                            <br>
+                                                                            <div class="row">
+                                                                                <div class="col-10">
+                                                                                    <label for="">Debe Bs</label>
+                                                                                    <input type="number" class="form-control" name="debe" id="debe"
+                                                                                    wire:model='debe' aria-describedby="helpId" placeholder="">
+                                                                                </div>
+                                                                            </div>
+                                                                            <br>
+                                                                            <div class="row">
+                                                                                <div class="col-10">
+                                                                                    <label for="">Haber Bs</label>
+                                                                                    <input type="number" class="form-control" name="haber" id="haber"
+                                                                                    wire:model='haber' aria-describedby="helpId" placeholder="">
+                                                                                </div>
+                                                                            </div>
+                                                                            
+                                                                            
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                            <button type="button" wire:click="modificar_asiento" class="btn btn-primary">Modificar</button>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="modal-body">
-                                                                    
-                                                                    <div class="row">
-                                                                        <div class="col-10">
-                                                                            <label for="">Codigo</label>
-                                                                            <input type="text" class="form-control" name="" id=""
-                                                                            wire:model='codigo' aria-describedby="helpId" placeholder="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <br>
-                                                                    <div class="row">
-                                                                        <div class="col-10">
-                                                                            <label for="">Cuenta</label>
-                                                                            <input type="text" class="form-control" name="idCuentaPlan" id="idCuentaPlan"
-                                                                            wire:model='idCuentaPlan' aria-describedby="helpId" placeholder="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <br>
-                                                                    <div class="row">
-                                                                        <div class="col-10">
-                                                                            <label for="">Glosa Individual</label>
-                                                                            <input type="text" class="form-control" name="glosa" id="glosa"
-                                                                            wire:model='glosa' aria-describedby="helpId" placeholder="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <br>
-                                                                    <div class="row">
-                                                                        <div class="col-10">
-                                                                            <label for="">Debe Bs</label>
-                                                                            <input type="number" class="form-control" name="debe" id="debe"
-                                                                            wire:model='debe' aria-describedby="helpId" placeholder="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <br>
-                                                                    <div class="row">
-                                                                        <div class="col-10">
-                                                                            <label for="">Haber Bs</label>
-                                                                            <input type="number" class="form-control" name="haber" id="haber"
-                                                                            wire:model='haber' aria-describedby="helpId" placeholder="">
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button type="button" class="btn btn-primary">Save</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div></td>
-                                                    {{--<td>
-                                                        @if (existe_factura($asiento->idComprobanteCuentaDetalle))
-                                                            <span class="badge badge-info">
-                                                                Facturado
-                                                            </span>
-                                                        @else
-                                                            <span class="badge badge-danger">
-                                                                Sin Facturar
-                                                            </span>
-                                                        @endif
-                                                    </td>--}}
-                                                </tr>
-                                               
-                                            
-                                            
+                                                            </div></td>
+                                                            
+                                                        </tr>
                                         
-                                            
-                                            @endforeach
-                                        
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td class="font-weight-bold">TOTALES : </td>
-                                            
-                                            @if ($facturar)
-                                            <td>{{$debe_factura}}</td>
-                                            <td>{{$haber_facturas}}</td>
-                                            <td>{{$montodebeSus_factura}}</td>
-                                            <td>{{$montohaberSus_factura}}</td>
-
-                                            @else
-                                            <td>{{$total_debe}}</td>
-                                            <td>{{$total_haber}}</td>
-                                            <td>{{$montodebeSus}}</td>
-                                            <td>{{$montohaberSus}}</td>
+                                                    @endforeach
                                                 
-                                            @endif
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td class="font-weight-bold">TOTALES : </td>
+                                                    
+                                                   <td>{{get_detalle($idComprobante)['total_debe']}}</td>
+                                                   <td>{{get_detalle($idComprobante)['total_haber']}}</td>
+                                                   <td>{{montoSus($tc,get_detalle($idComprobante)['total_debe'])}}</td>
+                                                   <td>{{montoSus($tc,get_detalle($idComprobante)['total_haber'])}}</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+        
 
                     <div class="card-body">
                         @if (count($array_asiento) > 0)
@@ -1191,7 +1337,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">Tipo Cambio</label>
-                                                <input type="number" readonly name="tc" id="tc" wire:model='tc'
+                                                <input type="number"  name="tc" id="tc" wire:model='tc'
                                                     class="form-control" placeholder="" aria-describedby="helpId">
                                             
                                             </div>
@@ -1379,7 +1525,7 @@
                                         
                                         <div class="col-md-6 text-right">
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelIdfacturarComprobante">
+                                            <button type="button" wire:click="iniciar_nuevo" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelIdfacturarComprobante">
                                             Facturar <i class="fa fa-file" aria-hidden="true"></i>
                                             </button>
                                         
@@ -1406,7 +1552,7 @@
                                                                 <div class="text-center">
                                                                     <p class="font-weight-bold"> DESEAS EMITIR FACTURA ?</p> 
                                                                     <button type="button" class="btn btn-success" wire:click='facturado(1)'>SI</button>
-                                                                    <button type="button" class="btn btn-danger" wire:click='facturado(0)'>NO</button>
+                                                                    <button type="button" class="btn btn-danger"  data-dismiss="modal" aria-label="Close">NO</button>
                                                                     
                                                                 </div>
                                                         @else
@@ -1421,7 +1567,7 @@
                                                                             
                                                                                 <div class="col-md-4"> 
                                                                                     <div  class="form-group">
-                                                                                <label for="">Sucursal  {{$sucursal}}</label>
+                                                                                <label for="">Sucursal  </label>
                                                                                     <select class="form-control" name="sucursal" id="sucursal" wire:model=sucursal>  
                                                                                 @if (is_null($sucursal))
                                                                                 <option value="">Seleccione una opcion</option>
@@ -1435,13 +1581,13 @@
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
-                                                                                    <label form="">Nro Factura {{$nro_factura}}</label>
+                                                                                    <label form="">Nro Factura </label>
                                                                             <input type="number" class="form-control" name="nro_factura" id="nro_factura"  wire:model='nro_factura' aria-describedby="helpId" placeholder="">
                                                                             </div>
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
-                                                                                    <label form="">NIT{{$nit_factura}}</label>
+                                                                                    <label form="">NIT</label>
                                                                                     <input type="number" class="form-control" name="nit_factura" id="nit_factura" wire:model='nit_factura' aria-describedby="helpId" placeholder="">
                                                                                 </div>
                                                                             </div>
@@ -1449,7 +1595,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
-                                                                                    <label form="">Nro Autorizacion {{$nroautorizacion}}</label>
+                                                                                    <label form="">Nro Autorizacion </label>
                                                                                     <input type="number" class="form-control" name="nroautorizacion" 
                                                                                     id="nroautorizacion" wire:model='nroautorizacion' aria-describedby="helpId" placeholder="">
                                                                                 </div>
@@ -1457,13 +1603,13 @@
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
-                                                                                    <label form="">Cod. Control {{$codcontrol}}</label>
+                                                                                    <label form="">Cod. Control </label>
                                                                                     <input type="number" class="form-control" name="codcontrol" id="codcontrol" wire:model='codcontrol' aria-describedby="helpId" placeholder="">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
-                                                                                    <label form="">Proveedor{{$proveedor}}</label>
+                                                                                    <label form="">Proveedor</label>
                                                                                     <input type="text" class="form-control" name="proveedor" id="proveedor" wire:model='proveedor' aria-describedby="helpId" placeholder="">
                                                                             </div>
                                                                         </div>
@@ -1472,19 +1618,19 @@
                                                                         <div class="row">
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
-                                                                                    <label form="">Total Factura{{$total_factura}}</label>
+                                                                                    <label form="">Total Factura</label>
                                                                                     <input type="number" class="form-control" name="total_factura" id="total_factura"wire:model='total_factura' aria-describedby="helpId" placeholder="">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
-                                                                                    <label form="">ICE {{$ice}}</label>
+                                                                                    <label form="">ICE </label>
                                                                                     <input type="number" class="form-control" name="ice" id="ice"wire:model='ice' aria-describedby="helpId" placeholder="">
                                                                                 </div>  
                                                                             </div>
                                                                             <div class="col-md-4">
                                                                                 <div class="form-group">
-                                                                                    <label form="">Importes Excentos {{$importes_excentos}}</label>
+                                                                                    <label form="">Importes Excentos </label>
                                                                                     <input type="number" class="form-control" name="importes_excentos" id="importes_excentos"wire:model='importes_excentos' aria-describedby="helpId" placeholder="">
                                                                                 </div>  
                                                                         </div>
@@ -1496,7 +1642,7 @@
                                                                     </div>
                                                                     <div class="col-md-4">
                                                                         <div class="form-group">
-                                                                            <label form="">Descuentos {{$descuentos}}</label>
+                                                                            <label form="">Descuentos </label>
                                                                             <input type="number" class="form-control" name="descuentos" id="descuentos"wire:model='descuentos' aria-describedby="helpId" placeholder="">
                                                                         </div>  
                                                                 </div>
@@ -1689,7 +1835,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-4">
                                                                     <div class="form-group">
-                                                                        <button type="button" wire:click="atras"class="btn btn-link">ATRAS</button>
+                                                                        <button type="button" wire:click="atras"class="btn btn-link">REGRESAR AL INICIO</button>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -1925,7 +2071,7 @@
                                                                     <div class="row">
                                                                         <div class="col-md-6">
                                                                             
-                                                                        <button type="button" wire:click="regresar_emitir_factura"class="btn btn-sm btn-link">REGRESAR</button>
+                                                                        <button type="button" wire:click="regresar_emitir_factura"class="btn btn-sm btn-link">ATRAS</button>
                                                                         
                                                                         </div>
                                                                         <div class="col-md-6">
@@ -2197,7 +2343,8 @@
                                                     <th>Debe Bs</th>  
                                                     <th>Haber Bs</th>  
                                                     <th>Debe $us</th>  
-                                                    <th>Haber $us</th>  
+                                                    <th>Haber $us</th> 
+                                                  
                                                     
                                                 </tr>
                                             </thead>
@@ -2234,6 +2381,7 @@
                                                             <td>{{ $asiento['haber_factura']}}</td>
                                                             <td>{{ montoSus($tc,$asiento['cuenta_factura_debe'])}}</td>
                                                             <td>{{ montoSus($tc,$asiento['haber_factura'])}}</td>
+                                                           
                                                         </tr>
 
                                                     {{-- CREDITO --}}
@@ -2245,15 +2393,10 @@
                                                         <td>{{ $asiento['haber_iva']}}</td>
                                                         <td>{{ montoSus($tc,$asiento['credito_fiscal_debe'])}}</td>
                                                         <td>{{ montoSus($tc,$asiento['haber_iva'])}}</td>
-                                                    </tr>
-
-                                                    
+                                                        
+                                                    </tr>                                               
                                                     
                                                 @endif
-                                                        
-                                                
-                                                
-                                            
                                                 
                                                 @endforeach
                                             
@@ -2316,11 +2459,21 @@
                                 <div class="col-md-8">
                                     <button type="button" wire:click='show_create' class="btn btn-sm btn-primary">Agregar</button>
                                 </div>
-                                <div class="col-md-4">
-                                   1 <input type="date" wire:model='fecha_inicio' class="form-control"  placeholder='Buscar'>
-                                   2 <input type="date" wire:model='fecha_final' class="form-control"  placeholder='Buscar'>
+                            </div>
+                            <br>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="">Fecha Inicio</label>
+                                        <input type="date" wire:model='fecha_inicio' class="form-control"  placeholder='Buscar'>
+                                        
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="">Fecha  Final</label>
+                                        <input type="date" wire:model='fecha_final' class="form-control"  placeholder='Buscar'>
+                                   
+                                    </div>
                                 </div>
-                           </div>
+         
                         </div>
 
                         <div class="card-body p-0">
@@ -2393,118 +2546,141 @@
                                                                             </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        {{-- <td>{{ $comprobante->idComprobante }}</td>
-                                                                        <td>{{ $comprobante->codigo }}</td>
-                                                                        <td>{{ $comprobante->numeroDocumento }}</td>
-                                                                        <td>{{ $comprobante->razon_social }}</td>
-                                                                        <td>{{ $comprobante->fecha }}</td>
-                                                                        <td>{{ $comprobante->glosa }}</td> --}}
+                                                               
+                                                                            <div class="container">
+                                                                                <div class="row">
+                                                                                
+                                                                                <div class="col-3 ">EMPRESA: 
+                                                                                    {{empresaid($comprobante->idEmpresa)->razonsocial}} 
+                                                                                </div>
 
+                                                                                <div class="col-6"></div>
+                                                                                <div class="col-3 text-lefth">FECHA : 
+                                                                                    {{ $comprobante->fecha  }}
+                                                                                </div>
+                                                                                </div>
 
-                                                                        <div class="card-header">
-                                                                            <div class="text-left col-lg-6">
-                                                                                <span class=""> NRO. COMPROBANTE :<strong> #{{ $comprobante->numeroDocumento }}
-                                                                                     {{-- {{ $ot }}  --}}
-                                                                                </strong></span>
+                                                                                <div class="row">
+                                                                                <div class="col-6 ">Direccion : 
+                                                                                    {{empresaid($comprobante->idEmpresa)->direccion}} 
+                                                                                </div>
+                                                                                <div class="col-3"></div>
+                                                                                <div class="col-3 text-lefth">T. C.:
+                                                                                    {{$comprobante->tc}}
+                                                                                </div>
+
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-3">GESTION: {{año()}}</div>
+                                                                                    <div class="col-6"></div>
+                                                                                    <div class="col-3">NIT: 
+                                                                                        {{empresaid($comprobante->idEmpresa)->nit}}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="col-3">MES: {{mes()}}</div>
+                                                                                    <div class="col-6"></div>
+                                                                                    <div class="col-3">Usuario: 
+                                                                                        @foreach (users() as $usuario)
+                                                                                        {{$usuario->name}}
+                                                                                        @endforeach
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
-                                                                            <div class="text-right col-lg-6">
-                                                                                {{-- <span class="badge {{ badge_estado_orden($estado) }}">
-                                                                                    {{ title_estado_orden($estado) }}
-                                                                                </span>
-                                                                    
-                                                                                <span class="badge {{ badge_baja_item($this->baja) }}">{{ title_baja_item($this->baja) }}</span>
-                                                                                <span
-                                                                                    class="badge {{ facturado_baja_item($this->facturado) }}">{{ title_facturar($this->facturado) }}</span> --}}
+                                                                            <br>
+                                                                            <div class="row">
+                                                                                <h3 class="col-12 text-center">COMPROBANTE DE {{comprobanteTipo($comprobante->idComprobanteTipo)->descripcion}}</h3>
+                                                                                <h5 class="col-12 text-center">NRO DE COMPROBANTE : {{$comprobante->numeroDocumento}}</h5>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="card-body">
-                                                                            <div class="p-2 border row">
-                                                                                <div class="text-left col-md-6s"><strong>MONEDA : </strong> 
-                                                                                    {{ moneda($comprobante->idMoneda)->descripcion  }}
+                                                                            <br> 
+                                                                            <div class="container">
+                                                                                <div class="row">
+                                                                                    <div class="col-6">CANCELADO A :</div>
+                                                                                    <div class="col-2"></div>
+                                                                                    <div class="col-7">{{ $comprobante->canceladoa }}</div>
                                                                                 </div>
-                                                   
-                                                                                <div class="text-right col-3"><strong> Tipo Cambio : </strong>
-                                                                                    {{ $comprobante->tc }}
-                                                                                    
-                                                                               </div>
-                                                                               F
-                                                                             
-                                                                            
-                                                                            {{-- <div class="p-2 border row">
-                                                                                <div class="text-left col-md-4"><strong>Codigo : </strong> 
-                                                                                    {{ $comprobante->codigo }}
+                                                                                <div class="row">
+                                                                                    <div class="col-6">POR CONCEPTO DE : </div>
+                                                                                    <div class="col-1"></div>
+                                                                                    <div class="col-8"> {{ $comprobante->glosa }}</div>
                                                                                 </div>
-                                                                                <div class="text-center col-md-4"><strong>Fecha : </strong> 
-                                                                                    {{ $comprobante->fecha }}
-                                                                                </div>
-                                                                                <div class="text-right col-md-4"><strong>Fecha Entrega : </strong>
-                                                                                </div>
-                                                                            </div> --}}
-                                                                    
-                                                                            <div class="card-body">
-                                                                                <div class="responsive">
-                                                                                    <table class="table">
-                                                                                        <thead>
-                                                                                            <tr>
-                                                                                              <th>Codigo</th>                                                               
-                                                                                                <th>Cuenta</th>                                                               
-                                                                                                <th>Glosa Individual</th>  
-                                                                                                <th>Debe Bs</th>  
-                                                                                                <th>Haber Bs</th>  
-                                                                                                <th>Debe Sus</th>  
-                                                                                                <th>Haber Sus</th>  
+                                                                                <br>
+                                                                                <br>
+                                                                                <table class="table table-bordered">
+                                                                                    <thead>
+                                                                                    <tr>
+                                                                                        <th scope="col">CODIGOS</th>
+                                                                                        <th scope="col">DESCRIPCION</th>
+                                                                                        <th scope="col">DEBE Bs</th>
+                                                                                        <th scope="col">HABER Bs</th>
+                                                                                        <th scope="col">DEBE $us</th>
+                                                                                        <th scope="col">HABER $us</th>
+                                                                                    </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        @foreach (detallecomprobante($comprobante->idComprobante)['asiento'] as $detalle )
+                                                                                        <tr>
+                                                                                                
+                                                                        
+                                                                                            <td>{{$detalle->codigo}}</td>                                     
+                                                                                            <td>{{CuentaPlane($detalle->idCuentaPlan)->descripcion}} <br>{{$detalle->glosa}} </td>                                                                                                                   
+                                                                                            <td>{{$detalle->debe}}</td>
+                                                                                            <td>{{$detalle->haber}}</td>
+                                                                                            <td>{{montoSus($comprobante->tc,$detalle->debe)}}</td>
+                                                                                            <td>{{montoSus($comprobante->tc,$detalle->haber)}}</td>
+                                                                                        </tr>
+                                                                                        @endforeach
 
-                                                                                            </tr>
-                                                                                        </thead>
-                                                                                        <tbody>
-                                                                                            @foreach (detallecomprobante($comprobante->idComprobante) as $detalle )
-                                                                                            <tr>
-                                                                                                    
-                                                                            
-                                                                                                <td>{{CuentaPlane($detalle->idCuentaPlan)->codigo}}</td>                                     
-                                                                                                <td>{{CuentaPlane($detalle->idCuentaPlan)->descripcion}}</td>                                             
-                                                                                                <td>{{$detalle->glosa}}</td>
-                                                                                                <td>{{$detalle->debe}}</td>
-                                                                                                <td>{{$detalle->haber}}</td>
-                                                                                                <td>{{montoSus($tc,$detalle->debe)}}</td>
-                                                                                                <td>{{montoSus($tc,$detalle->haber)}}</td>
+                                                                                    </tbody>
+                                                                                    <tfoot>
+                                                                                        <tr>
+                                                                                        
+                                                                                            <td></td>
+                                                                                            <td class="font-weight-bold">TOTALES : </td>
+                                                                                        
+                                            
+                                                                                        
+                                                                                            <td>{{detallecomprobante($comprobante->idComprobante)['total_debes']}}</td>
+                                                                                            <td>{{detallecomprobante($comprobante->idComprobante)['total_habers']}}</td>
+                                                                                            <td>{{montoSus($comprobante->tc,detallecomprobante($comprobante->idComprobante)['total_debes'])}}</td>
+                                                                                            <td>{{montoSus($comprobante->tc,detallecomprobante($comprobante->idComprobante)['total_habers'])}}</td>
                                                                                                 
-                                                                                             </tr>
-                                                                                            @endforeach
-                                                                                                
-                                                                                             
-                                                                                    
-                                                                                        </tbody>
-                                                                                        <tfoot>
-                                                                                            <tr>
-                                                                                               
-                                                                                                <td></td>
-                                                                                                <td class="font-weight-bold">TOTALES :</td>
-                                                                                               
-                                                                                                
-                                                                                                
-                                                                                               
-                                                                                            </tr>
-                                                                                     
-                                                                                        </tfoot>
+                                                                                        
+                                                                                        </tr>
+                                                                                    </tfoot>
                                                                                 </table>
+                                                                        <br>
+                                                                            
+                                                                            <div class="row">
+                                                                                <div class="col-12">
+                                                                                    <strong>SON :</strong>
+                                                                                    {{convertir(detallecomprobante($comprobante->idComprobante)['total_debes'])}} 00/100 BOLIVIANOS
+                                                                                </div>
+                                                                            </div>    
+                                                                            
+                                                                                    
+                                                                        <br>
+                                                                        <br>
+                                                                        <br>
+                                                                        
+                                                                            <div class="row">
+                                                                                <div class="col-4 text-lefht">
+                                                                                        ____________________
+                                                                                    <strong>GERENCIA GENERAL</strong> 
+                                                                                </div>
+                                                                                <div class="col-4 text-center">
+                                                                                        ______________________
+                                                                                    <strong>ADMINISTRACION</strong>    
+                                                                                </div> 
+                                                                                <div class="col-3 text-right">
+                                                                                    
+                                                                                        _______________
+                                                                                    <strong>CONTABILIDAD</strong>     
+                                                                                    
+                                                                                </div>
                                                                             </div>
-                                                                    
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                                            
                                                         </div>
-                                                        <!-- Button trigger modal -->
-                                                       {{-- <button
-                                                            wire:click='show_update({{ $comprobante->idComprobante }})'
-                                                            type="button" class="btn btn-sm btn-success">
-                                                            <i class="fas fa-edit"></i>
-                                                        </button> --}}
                                                     </td>
                                                 </tr>
                                             @endforeach

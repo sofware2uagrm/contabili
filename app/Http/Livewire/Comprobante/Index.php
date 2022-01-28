@@ -24,7 +24,7 @@ class Index extends Component
     public $numeroDocumento;
     public $glosa;
     public $razonSocial;
-    public $tc = 6.96;
+    public $tc=6.96;
     public $canceladoa;
     public $fecha;
     public $estado;
@@ -37,6 +37,7 @@ class Index extends Component
     public $idUser;
     public $idEmpresa;
 
+    public $monto;
 
     public $idCuentaPlanTipo;
     public $idCuentaPlanHija;
@@ -75,7 +76,7 @@ class Index extends Component
     //para el plan de cuentas comprobante
     public $idCuentaPlanSeleccionadaComprobante;
     public $codigoSeleccionadoComprobante;
-
+    public $idCuentaPlan_edit;
 
     use WithPagination;
     ///Factura
@@ -103,6 +104,7 @@ class Index extends Component
 
     public $fecha_inicio;
     public $fecha_final;
+    public $searchempresa;
 
     protected $paginationTheme = 'bootstrap';
     public function render()
@@ -117,7 +119,16 @@ class Index extends Component
         return view('livewire.comprobante.index', [
             'comprobantes' => $comprobantes
         ]);
+
     }
+
+   /* public function buscarempresa(){
+        $searchempresa = '%'.$this->searchempresa.'%';
+        return view('livewire.comprobante.index',[
+            'empresas' =>  Empresa::where('
+            razonsocial','LIKE','%'.$searchempresa.'%')->paginate(5)
+        ]);
+    }*/
     public function atras()
     {
         $this->pregunta = true;
@@ -148,25 +159,41 @@ class Index extends Component
     public function show_create()
     {
         $this->interfaces(true, false,false);
+        $this->reset_comprobante();
+       
+        $this->reset_total();
     }
 
     public function close_create()
     {
         $this->interfaces(false, false,false);
+
     }
     public function show_form_comprobante()
     {
         $this->factura = false;
+      
+        
+    }
+    public function iniciar_nuevo(){
+        if($this->idComprobanteTipo == 3){
+            $this->pregunta=false;
+            $this->factura=false;
+            $this->facturar=false;
+        }
+        else{
+            $this->pregunta=true;
+        }
+      
+        $this->reset_factura();
+        $this->reset_comprobante_detalle();
     }
 
     public function show_update(Comprobante $comprobante)
     {
          $this->idComprobante = $comprobante->idComprobante;
-         $this->codigo=$comprobante->codigo;
-         $this->referidoa=$comprobante->referidoa;
          $this->numeroDocumento=$comprobante->numeroDocumento;
-         $this->glosa=$comprobante->glosa;
-         $this->razonSocial=$comprobante->razon_social;
+         $this->glosa=$comprobante->glosa; 
          $this->tc=$comprobante->tc;
          $this->canceladoa=$comprobante->canceladoa;
          $this->fecha=$comprobante->fecha;
@@ -180,11 +207,8 @@ class Index extends Component
     public function actualizar_comprobante(){
 
         $comprobante = Comprobante::findOrFail($this->idComprobante);
-        $comprobante->codigo=$this->codigo;
-        $comprobante->referidoa=$this->referidoa;
         $comprobante->numeroDocumento=$this->numeroDocumento;
         $comprobante->glosa=$this->glosa;
-        $comprobante->razon_social=$this->razonSocial;
         $comprobante->tc=$this->tc;
         $comprobante->canceladoa=$this->canceladoa;
         $comprobante->fecha=$this->fecha;
@@ -195,10 +219,6 @@ class Index extends Component
         $comprobante->idEmpresa=$this->idEmpresa;
         $comprobante->update();
         $this->interfaces(false,false,false);
-
-
-
-
 
         /* $this->idComprobante = null;
          $this->codigo = null;
@@ -233,7 +253,7 @@ class Index extends Component
         
         // PRIMER metodo
        
-
+        if ($this->total_haber == $this->total_debe) {
         if ($this->facturar) {
             array_push($this->array_asiento, [
                 //asiento
@@ -368,20 +388,7 @@ class Index extends Component
         
           
         } else {
-            $comprobante = new Comprobante();
-            $comprobante->codigo = $this->codigo;
-            $comprobante->referidoa = $this->referidoa;
-            $comprobante->numeroDocumento = nrocomprobante($this->idComprobanteTipo, $this->fecha) + 1;
-            $comprobante->glosa = $this->glosa;
-            $comprobante->razon_social = $this->razonSocial;
-            $comprobante->tc = $this->tc;
-            $comprobante->canceladoa = $this->canceladoa;
-            $comprobante->fecha = $this->fecha;
-            $comprobante->estado = 0;
-            $comprobante->idMoneda = $this->idMoneda;
-            $comprobante->idComprobanteTipo = $this->idComprobanteTipo;
-            $comprobante->idEmpresa = $this->idEmpresa;
-            $comprobante->save();
+           
 
             for ($i = 0; $i < count($this->array_asiento); $i++) {
                 $detalle = new ComprobanteCuentaDetalle();
@@ -390,26 +397,27 @@ class Index extends Component
                 $detalle->debe = $this->array_asiento[$i]['debe'];
                 $detalle->haber = $this->array_asiento[$i]['haber'];
                 $detalle->idCuentaPlan = $this->array_asiento[$i]['idCuentaPlan'];
-                $detalle->idComprobante = $comprobante->idComprobante;
+                $detalle->idComprobante = $this->idComprobante;
                 $detalle->save();
             }
         }
-
+ }
         //$this->interfaces(false, false);
         $this->array_asiento = [];
        
-    }
+   
+}
     
 
     public function add_asiento()
     {
         $validatedData = $this->validate([
-            'glosaDetalle' => 'required',
+            
             'debe' => 'required',
             'haber' => 'required',
 
         ], [
-            'glosaDetalle.required' => 'El campo Folio es obligatorio',
+            
             'debe.required' => 'El campo Debe es obligatorio',
             'haber.required' => 'El campo Haber es obligatorio',
 
@@ -497,9 +505,9 @@ class Index extends Component
             ]);
         }
         if ($this->facturar) {
-            $this->debe_factura = (floatval($this->total_factura)) - floatval(get_iva($this->total_factura)) + get_iva($this->total_factura) + $this->debe_factura;
+            $this->debe_factura = (floatval($this->total_factura)) - floatval(get_iva($this->total_factura)) + floatval(get_iva($this->total_factura)) + $this->debe_factura;
             $this->haber_facturas = $this->haber_facturas + $this->haber_factura + $this->haber_iva + $this->haber;
-            $this->montodebeSus_factura = $this->montodebeSus_factura + montoSus($this->tc, (floatval($this->total_factura)) - floatval(get_iva($this->total_factura))) + montoSus($this->tc, get_iva($this->total_factura));
+            $this->montodebeSus_factura =  montoSus($this->tc, (floatval($this->total_factura)) - floatval(get_iva($this->total_factura))) + montoSus($this->tc, get_iva($this->total_factura)) + $this->montodebeSus_factura ;
             $this->montohaberSus_factura = $this->montohaberSus_factura + montoSus($this->tc, $this->haber_factura) + montoSus($this->tc, $this->haber_iva) + montoSus($this->tc, $this->haber);
         } else {
             $this->total_debe =  $this->total_debe + $this->debe;
@@ -513,10 +521,51 @@ class Index extends Component
     public function reset_comprobante_detalle()
     {
         $this->glosaDetalle = null;
+        $this->codigoSeleccionadoComprobante=null;
         $this->debe = null;
         $this->haber = null;
-
+        
         $this->idCuentaPlan = null;
+    }
+    public function reset_comprobante(){
+ 
+        $this->numeroDocumento=null;
+        $this->glosa=null;  
+        $this->canceladoa=null;
+        $this->fecha=null;
+        $this->tc=null;
+        $this->idMoneda=null;     
+        $this->idComprobanteTipo=null;   
+        $this->idEmpresa=null;
+       
+    }
+    public function reset_total(){
+        $this->debe_factura=null;
+        $this->haber_facturas =null;
+        $this->montodebeSus_factura =null;
+        $this->montohaberSus_factura = null;
+        $this->total_debe=null;
+        $this->total_haber = null;
+        $this->montodebeSus = null;
+        $this->montohaberSus = null;
+    }
+    public function reset_factura(){
+        $this->nro_factura=null;
+        $this->nit_factura=null;
+        $this->sucursal=null;
+        $this->proveedor=null;
+        $this->nroautorizacion=null;
+        $this->codcontrol=null;
+        $this->total_factura=null;
+        $this->ice=null;
+        $this->importes_excentos=null;
+        $this->descuentos=null;
+        $this->credito_fiscal=null;
+        $this->codigoSeleccionadoFactura=null;
+        $this->codigoSeleccionadoComprobanteFactura=null;
+        $this->debe = null;
+        $this->haber = null;
+        
     }
 
     public function add_comprobante()
@@ -527,30 +576,30 @@ class Index extends Component
 
 
                 'tc' => 'required',
-                'canceladoa' => 'required',
-                'glosa' => 'required',
                 'fecha' => 'required',
+                'glosa'=>'required',      
                 'idMoneda' => 'required',
-                'idComprobanteTipo' => 'required',
-
+                'idComprobanteTipo' => 'required',         
+                'canceladoa'=>'required',
+                
             ], [
 
 
-                'tc.required' => 'El campo Tipo Cambio es obligatorio',
-                'canceladoa.required' => 'El campo Cancelado a es obligatorio',
-                'glosa.required' => 'El campo Glosa es obligatorio',
+                'tc.required' => 'El campo Tipo Cambio es obligatorio', 
                 'fecha.required' => 'El campo Fecha es obligatorio',
+                'glosa.required' => 'El campo Glosa es obligatorio',
                 'idMoneda.required' => 'El campo Moneda es obligatorio',
                 'idComprobanteTipo.required' => 'El campo Tipo Comprobante es obligatorio',
+                'canceladoa.required'=>'El campo Cancelado A es obligatorio'
+                
+
+
 
             ]);
             if ($this->facturar) {
                 $comprobante = new Comprobante();
-                $comprobante->codigo = $this->codigo;
-                $comprobante->referidoa = $this->referidoa;
                 $comprobante->numeroDocumento = nrocomprobante($this->idComprobanteTipo, $this->fecha) + 1;
-                $comprobante->glosa = $this->glosa;
-                $comprobante->razon_social = $this->razonSocial;
+                $comprobante->glosa = $this->glosa;     
                 $comprobante->tc = $this->tc;
                 $comprobante->canceladoa = $this->canceladoa;
                 $comprobante->fecha = $this->fecha;
@@ -558,6 +607,7 @@ class Index extends Component
                 $comprobante->idMoneda = $this->idMoneda;
                 $comprobante->idComprobanteTipo = $this->idComprobanteTipo;
                 $comprobante->idEmpresa = $this->idEmpresa;
+                $comprobante->idUser=$this->idUser;
                 $comprobante->save();
 
 
@@ -610,11 +660,8 @@ class Index extends Component
                
             } else {
                 $comprobante = new Comprobante();
-                $comprobante->codigo = $this->codigo;
-                $comprobante->referidoa = $this->referidoa;
                 $comprobante->numeroDocumento = nrocomprobante($this->idComprobanteTipo, $this->fecha) + 1;
                 $comprobante->glosa = $this->glosa;
-                $comprobante->razon_social = $this->razonSocial;
                 $comprobante->tc = $this->tc;
                 $comprobante->canceladoa = $this->canceladoa;
                 $comprobante->fecha = $this->fecha;
@@ -686,7 +733,25 @@ class Index extends Component
     public function show_asiento(ComprobanteCuentaDetalle $detalle){
         $this->idComprobanteCuentaDetalle =$detalle->idComprobanteCuentaDetalle;
         $this->codigo=$detalle->codigo;
+        $this->idCuentaPlan_edit= $detalle->idCuentaPlan ;
         $this->glosa=$detalle->glosa;
         $this->debe=$detalle->debe;
+        $this->haber=$detalle->haber;
+    }
+    public function seleccionar_asiento($key1, $key2, $key3, $key4, $key5, $idCuentaPlan)
+    {
+            $this->idCuentaPlan_edit = $idCuentaPlan;
+            $this->codigo = $key1 . "0" . $key2 . "0" . $key3 . "0" . $key4 . "0" . $key5;
+    }
+    public function modificar_asiento()
+    {
+        $detalle = ComprobanteCuentaDetalle::findOrFail($this->idComprobanteCuentaDetalle);
+        $detalle->codigo=$this->codigo;
+        $detalle->idCuentaPlan=$this->idCuentaPlan_edit;
+        $detalle->glosa=$this->glosa;
+        $detalle->debe=$this->debe;
+        $detalle->haber=$this->haber;
+        $detalle->update();
+
     }
 }
