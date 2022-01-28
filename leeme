@@ -1,0 +1,13 @@
+1. CREAR BASE DE DATOS EN EL XAMPP
+2. EJECUTAR EN TERMINAL 
+    1. componser install
+    2. cp .env.example .env
+    3. php artisan key:generate
+
+3. CONFIGURAR ENV COLOCA EL NOMBRE DE TU BASE DE DATOS
+4. EJECUTAR MIGRATION Y SEEDER EN LA TERMINAL
+    1. php artisan migrate
+    2. php artisan db:seed
+5. EJECUTAR NPM EN LA TERMINAL
+    1. npm install
+    1. npm run dev
