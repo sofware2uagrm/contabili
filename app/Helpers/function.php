@@ -175,7 +175,10 @@ function cuantas_plan_padre(){
          return ['asiento'=>$asiento,'total_debes'=>$total_debes,'total_habers'=>$total_habers];
     }
     
-    
+    function detallecomprobantelibro($id){
+        return ComprobanteCuentaDetalle::where('idComprobante','=',$id)->get();
+
+    }
     function subcuentaasiento($id){
         return CuentaPlan::where('idCuentaPlan','=',$id)->get();
     

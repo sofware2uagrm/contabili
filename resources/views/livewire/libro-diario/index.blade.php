@@ -73,7 +73,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach (detallecomprobante($comprobante->idComprobante) as $item)
+                                                    @foreach (detallecomprobantelibro($comprobante->idComprobante) as $item)
                                                     <tr>
                                                         <td scope="row">{{$item->idComprobanteCuentaDetalle}}</td>
                                                         <td>{{$item->glosa}}</td>
