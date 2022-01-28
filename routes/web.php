@@ -3,6 +3,7 @@
 use App\Http\Controllers\ComprobanteController;
 use App\Http\Controllers\CuentaPlanController;
 use App\Http\Controllers\CuentaPlanTipoController;
+use App\Http\Controllers\GestionController;
 use App\Http\Controllers\LibroDiarioController;
 use App\Http\Controllers\LibroMayorController;
 use App\Http\Controllers\PDFController;
@@ -10,6 +11,8 @@ use App\Http\Controllers\PlanController;
 use App\Models\Comprobante;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\ActualController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +50,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('comprobantesPdf/{desde}/{hasta}/{idComprobanteTipo}',[PdfController::class,'comprobantesPDF'])->name('comprobantes.pdf');
     Route::get('libroMayorPdf/{desde}/{hasta}/{idCuentaPlan}',[PdfController::class,'libroMayor'])->name('libro-mayor.pdf');
-    
+    Route::resource('empresas', EmpresaController::class)->names('empresas');
+    Route::resource('gestions', GestionController::class)->names('gestions');
+    Route::get('datosdelaempresa',[ActualController::class,'empresaactual'])->name('datosdelaempresa');
+    Route::get('gestiondelaempresa',[ActualController::class,'gestionactual'])->name('gestiondelaempresa');
+     
 });
 
 Auth::routes();

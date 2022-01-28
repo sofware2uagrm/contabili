@@ -20,6 +20,7 @@ class CreateEmpresasTable extends Migration
                 $table->string('razonsocial');
                 $table->string('nit');
                 $table->string('direccion');
+                $table->string('licencia')->nullable();
                 $table->string('telefono');
                 $table->string('ciudad');
                 $table->string('actividad');
@@ -27,7 +28,6 @@ class CreateEmpresasTable extends Migration
                 $table->string('ci_responsable');
                 $table->string('sucursal');              
                 $table->enum('estado',['activo','inactivo']);
-                
                 $table->integer('idUser')->unsigned()->nullable();
                 $table->foreign('idUser')->on('users')->references('id')->onDelete('cascade');
             });
