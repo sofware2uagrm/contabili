@@ -7,6 +7,5 @@
 
 
 @section('content')
-
-    @livewire('comprobante.index', ['user' => Auth::user()->id])    
+    @livewire('empresa-ac.index', ['user' => Auth::user()->id])    
 @endsection
