@@ -627,7 +627,6 @@
             "time": "2020-12-29T14:50:06+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "ezyang/htmlpurifier",
             "version": "v4.14.0",
             "source": {
@@ -688,17 +687,6 @@
             },
             "dist": {
                 "type": "zip",
-=======
-            "name": "fruitcake/laravel-cors",
-            "version": "v2.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fruitcake/laravel-cors.git",
-                "reference": "3a066e5cac32e2d1cdaacd6b961692778f37b5fc"
-            },
-            "dist": {
-                "type": "zip",
->>>>>>> d32a37729db7e9708447bba4675f61e8c1128a0f
                 "url": "https://api.github.com/repos/fruitcake/laravel-cors/zipball/3a066e5cac32e2d1cdaacd6b961692778f37b5fc",
                 "reference": "3a066e5cac32e2d1cdaacd6b961692778f37b5fc",
                 "shasum": ""
@@ -1988,7 +1976,6 @@
                 }
             ],
             "time": "2022-01-21T13:39:10+00:00"
-<<<<<<< HEAD
         },
         {
             "name": "maatwebsite/excel",
@@ -2245,8 +2232,6 @@
                 "source": "https://github.com/MarkBaker/PHPMatrix/tree/3.0.0"
             },
             "time": "2021-07-01T19:01:15+00:00"
-=======
->>>>>>> d32a37729db7e9708447bba4675f61e8c1128a0f
         },
         {
             "name": "monolog/monolog",
@@ -2348,7 +2333,6 @@
             "time": "2021-10-01T21:08:31+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "myclabs/php-enum",
             "version": "1.8.3",
             "source": {
@@ -2418,17 +2402,6 @@
             },
             "dist": {
                 "type": "zip",
-=======
-            "name": "nesbot/carbon",
-            "version": "2.56.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "626ec8cbb724cd3c3400c3ed8f730545b744e3f4"
-            },
-            "dist": {
-                "type": "zip",
->>>>>>> d32a37729db7e9708447bba4675f61e8c1128a0f
                 "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/626ec8cbb724cd3c3400c3ed8f730545b744e3f4",
                 "reference": "626ec8cbb724cd3c3400c3ed8f730545b744e3f4",
                 "shasum": ""
@@ -6892,6 +6865,9 @@
             "require": {
                 "php": "^7.1 || ^8.0"
             },
+            "replace": {
+                "myclabs/deep-copy": "self.version"
+            },
             "require-dev": {
                 "doctrine/collections": "^1.0",
                 "doctrine/common": "^2.6",
@@ -8800,5 +8776,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.1.0"
 }
