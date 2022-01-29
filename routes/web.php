@@ -42,6 +42,19 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+    Route::get('/usuario/index', [App\Http\Controllers\Seguridad\UsuarioController::class, 'view_index']);
+    Route::get('/usuario/create', [App\Http\Controllers\Seguridad\UsuarioController::class, 'view_create']);
+    Route::get('/usuario/edit/{idusuario}', [App\Http\Controllers\Seguridad\UsuarioController::class, 'view_edit']);
+    Route::get('/usuario/show/{idusuario}', [App\Http\Controllers\Seguridad\UsuarioController::class, 'view_show']);
+
+    Route::get('/grupo_usuario/index', [App\Http\Controllers\Seguridad\GrupoUsuarioController::class, 'view_index']);
+    Route::get('/grupo_usuario/create', [App\Http\Controllers\Seguridad\GrupoUsuarioController::class, 'view_create']);
+    Route::get('/grupo_usuario/edit/{idgrupousuario}', [App\Http\Controllers\Seguridad\GrupoUsuarioController::class, 'view_edit']);
+    Route::get('/grupo_usuario/show/{idusuario}', [App\Http\Controllers\Seguridad\GrupoUsuarioController::class, 'view_show']);
+
+    Route::get('/formulario/index', [App\Http\Controllers\Seguridad\FormularioController::class, 'view_index']);
+    Route::get('/formulario/asignar', [App\Http\Controllers\Seguridad\FormularioController::class, 'view_asignar']);
+
     Route::get('/cuenta-plan',[CuentaPlanController::class,'mostrar'])->name('cuenta-plan.index');
     Route::get('/cuenta-tipo-plan',[CuentaPlanTipoController::class,'mostrar'])->name('cuenta-plan-tipo.index');
 

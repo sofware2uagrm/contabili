@@ -7,9 +7,13 @@ use Illuminate\Http\Request;
 
 class GestionController extends Controller
 {    public function index()
-    { //return session('empresa_id');
+    { if(session('empresa_id')){
         $gestions=Gestion::where('empresa_id','=',session('empresa_id'))->get();
         return view('gestions.index',compact('gestions'));        
+    }
+    else{
+        return redirect()->route('empresas.index')->with('mensaje','Escoja una empresa para ver su getion');
+    }
     }
     public function create()
     {
@@ -29,9 +33,10 @@ class GestionController extends Controller
         'descripcion'=> "$request->descripcion",
         'fecha_ini'=>$request->fecha,
         'fecha_fin'=>$request->fecha2,
-        'empresa_id'=>'2'
+        
         ]);
-        return $hola;
+        $hola['empresa_id']=session('empresa_id');
+        $hola->update();
     }
     else{
 
@@ -40,14 +45,13 @@ class GestionController extends Controller
             'fecha_fin'=>'required'
             ]);
            
-        Gestion::create([
+       $hola= Gestion::create([
             'descripcion'=> "$request->descripcion",
             'fecha_ini'=>$request->fecha_ini,
             'fecha_fin'=>$request->fecha_fin,
-            'empresa_id'=>'2',
-            //'empresa_id'=>session('empresa_id')
             ]);
-
+            $hola['empresa_id']=session('empresa_id');
+            $hola->update();
     }
         return redirect()->route('gestions.index');
 

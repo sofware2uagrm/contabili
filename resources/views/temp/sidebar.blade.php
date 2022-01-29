@@ -58,6 +58,27 @@
                                 </li>
                             </ul>
                         </div>
+
+                        <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-7" aria-controls="submenu-7">
+                            <i class="fa fa-fw fa-user-circle"></i>Seguridad <span class="badge badge-success">6</span>
+                        </a>
+                        <div id="submenu-7" class="collapse submenu">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/usuario/index">Usuario</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/grupo_usuario/index">Grupo Usuario</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/formulario/index">Formulario</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/formulario/asignar">Asignar Formulario</a>
+                                </li>
+                            </ul>
+                        </div>
+
                     </li>
                 </ul>
             </div>
