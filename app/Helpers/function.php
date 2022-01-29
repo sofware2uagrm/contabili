@@ -483,3 +483,15 @@ function cuantas_plan_padre(){
 
        return $comprobante;
     }
+
+
+
+    function empresa__actual($empresa_id)
+{
+    return Empresa::findOrFail($empresa_id);
+    }
+
+    function empresas_user($user_id)
+    {
+        return Empresa::where('idUser','=',$user_id)->get();
+        }

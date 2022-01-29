@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AcEmpresaController;
 use App\Http\Controllers\ComprobanteController;
 use App\Http\Controllers\CuentaPlanController;
 use App\Http\Controllers\CuentaPlanTipoController;
@@ -69,11 +70,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('comprobantesPdf/{desde}/{hasta}/{idComprobanteTipo}',[PdfController::class,'comprobantesPDF'])->name('comprobantes.pdf');
     Route::get('libroMayorPdf/{desde}/{hasta}/{idCuentaPlan}',[PdfController::class,'libroMayor'])->name('libro-mayor.pdf');
+  
+  
+  ///
     Route::resource('empresas', EmpresaController::class)->names('empresas');
     Route::resource('gestions', GestionController::class)->names('gestions');
-    Route::get('datosdelaempresa',[ActualController::class,'empresaactual'])->name('datosdelaempresa');
-    Route::get('gestiondelaempresa',[ActualController::class,'gestionactual'])->name('gestiondelaempresa');
-
+   Route::resource('acempresas',AcEmpresaController::class)->names('acempresas');
     //de lucas 
     Route::resource('moneda', MonedaController::class);
     Route::post('moneda/update/{moneda}',[ MonedaController::class , 'update']);
