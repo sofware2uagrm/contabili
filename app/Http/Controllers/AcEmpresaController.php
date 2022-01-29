@@ -35,7 +35,12 @@ class AcEmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $empresa= Empresa::where('idEmpresa','=', $request->empresa_id)->first();    
+        session([
+            'empresa_id'=> "$empresa->idEmpresa",
+            'nombre'=>"$empresa->razonsocial"
+        ]); 
+        return redirect()->route('empresas.index');
     }
 
     /**
