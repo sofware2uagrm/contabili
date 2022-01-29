@@ -20,6 +20,30 @@
     <script src="{{ asset('assets/libs/js/dashboard-ecommerce.js') }}"></script>
 
     <!-- leonel -->
+    <script>
+    $(function() {
+        $("#limpiador").click(function() {
+             // alert
+             swal({
+                 title: "desea borrar las historias de usuarios",
+                 text: "{{Auth::user()->name}}",
+                 icon: "warning",
+                 buttons: true,
+                 dangerMode: false,
+             }).then((willDelete) => {
+                             if (willDelete) {
+                                 $("#limpiador").submit();
+                             } else {
+                                 swal("cancelada!");
+                             }
+               });
+           })
+         }
+       )
+     </script>
+         
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 

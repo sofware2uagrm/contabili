@@ -13,6 +13,7 @@ use App\Models\Comprobante;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\EmpresaDeleteController;
 use App\Http\Controllers\ActualController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\VentaController;
@@ -81,6 +82,7 @@ Route::group(['middleware' => 'auth'], function () {
   
   ///
     Route::resource('empresas', EmpresaController::class)->names('empresas');
+    Route::resource('empresasDelete', EmpresaDeleteController::class)->names('empresasDelete');
     Route::resource('gestions', GestionController::class)->names('gestions');
     Route::get('datosdelaempresa',[ActualController::class,'empresaactual'])->name('datosdelaempresa');
     Route::get('gestiondelaempresa',[ActualController::class,'gestionactual'])->name('gestiondelaempresa');

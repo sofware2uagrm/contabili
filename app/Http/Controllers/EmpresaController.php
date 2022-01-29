@@ -56,7 +56,7 @@ class EmpresaController extends Controller
 
 
     public function edit(Empresa $empresa)
-    { 
+    {  
         return view('empresas.edit', compact('empresa'));
     }
 
@@ -79,15 +79,21 @@ class EmpresaController extends Controller
 
     public function destroy(Empresa $empresa)
     {
-        $empresas=Empresa::findOrFail($empresa->idEmpresa);
-        if(Storage::delete('public/'.$empresas->logo)){
+        dd($empresa);
+        $empresa= request()->except('_token');
 
-        }
-        Empresa::destroy($empresa->idEmpresa);
+       // $empresas=Empresa::findOrFail($empresa->idEmpresa);
+      //  if(Storage::delete('public/'.$empresas->logo)){
+        //}
+      //  Empresa::destroy($empresa->idEmpresa);
        
-        return redirect()->route('empresas.index')->with('mensaje','Empleado borrado');
+    //    return redirect()->route('empresas.index')->with('mensaje','Empleado borrado');
  
     }
+
+
+
+ 
  
 
 
