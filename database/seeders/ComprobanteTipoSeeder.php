@@ -17,15 +17,15 @@ class ComprobanteTipoSeeder extends Seeder
         // Ingreso Egreso y traspaso
 
         DB::table('comprobante_tipo')->insert([
+            'descripcion' => 'ingreso',
+            'estado' => 1
+        ]);
+        DB::table('comprobante_tipo')->insert([
             'descripcion' => 'egreso',
             'estado' => 1
         ]);
         DB::table('comprobante_tipo')->insert([
             'descripcion' => 'traspaso',
-            'estado' => 1
-        ]);
-        DB::table('comprobante_tipo')->insert([
-            'descripcion' => 'ingreso',
             'estado' => 1
         ]);
     }

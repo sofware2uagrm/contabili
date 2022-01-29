@@ -62,9 +62,10 @@
                                             <label for="">Moneda</label>
                                             <select wire:ignore class="form-control" name="moneda" id="moneda" wire:model='idMoneda'>
                                                 @if (is_null($idMoneda))
-                                                <option value="">Seleccione una opcion</option>
+                                                <option value="">Seleccione una opcion</option> 
                                             @endif
                                         @foreach (monedas() as $moneda)
+                                        <!-- lucas modifico por su configuracion -->
                                                 <option value="{{$moneda->idMoneda}}">{{$moneda->descripcion}}</option>                                              
                                         @endforeach
                                             </select>
@@ -1389,10 +1390,10 @@
                                                 <label for="">Moneda</label>
                                                 <select wire:ignore class="form-control" name="moneda" id="moneda" wire:model='idMoneda'>
                                                     @if (is_null($idMoneda))
-                                                    <option value="">Seleccione una opcion</option>
-                                                @endif
+                                                   <option value="">Seleccione una opcion</option>
+                                                    @endif 
                                             @foreach (monedas() as $moneda)
-                                                    <option value="{{$moneda->idMoneda}}">{{$moneda->descripcion}}</option>                                              
+                                                    <option class="@if ($moneda->estado == 1) {{ "text-primary" }} @endif"  value="{{$moneda->idMoneda}}">{{$moneda->descripcion}}</option>                                              
                                             @endforeach
                                                 </select>
                                             </div>

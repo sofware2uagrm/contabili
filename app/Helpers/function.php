@@ -10,6 +10,7 @@ use App\Models\Empresa;
 use App\Models\Especifica;
 use App\Models\Moneda;
 use App\Models\Factura;
+use App\Models\asiento_LCV;
 use App\Models\User;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -247,8 +248,14 @@ function cuantas_plan_padre(){
     }
 
     function get_iva($totalfactura){
+       //agreado por lucas
+        $n=asiento_LCV::all();
+        $n=$n->where('id',1)->first();
+        $n=$n->credito_Fiscal;
+      //asta aqui
+
         if($totalfactura!=0){
-            $valor=(float)$totalfactura*(13/100);
+            $valor=(float)$totalfactura*($n/100);
             return redondear_dos_decimal($valor);
         }
         
