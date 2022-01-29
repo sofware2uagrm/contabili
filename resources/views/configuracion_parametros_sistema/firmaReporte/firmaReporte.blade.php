@@ -1,16 +1,8 @@
 @extends('layouts.home')
 @section('title')
-    <title>Comprobante</title>
+    <title>Firma Reporte</title>
 @endsection
 
-
-@section('breadcrumb')
-    @include('temp.breadcrumb',[
-        "title"=> "Comprobante",
-        "page"=>"Dashboard",
-        "subPage"=>"Comprobante",
-    ])
-@endsection
 
 @section('content')
 

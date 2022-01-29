@@ -11,62 +11,7 @@
                       Razon Social:{{session('nombre')}}
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Configuracion <span class="badge badge-success">6</span></a>
-                        <div id="submenu-1" class="collapse submenu">
-                            <ul class="nav flex-column">
-                                
-                                {{-- <li class="nav-item">
-                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-2" aria-controls="submenu-1-2">Cuentas</a>
-                                    <div id="submenu-1-2" class="collapse submenu">
-                                        <ul class="nav flex-column">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('cuenta-plan-tipo.index') }}">Tipo de Cuenta</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('cuenta-plan.index') }}">Plan de Cuenta</a>
-                                            </li>
-
-                                            
-                                           
-                                        </ul>
-                                    </div>
-                                </li>
-
-                                 --}}
-
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-4" aria-controls="submenu-1-2">Cuentas</a>
-                                    <div id="submenu-1-4" class="collapse submenu">
-                                        <ul class="nav flex-column">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('plan.index') }}">Plan</a>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('libro-diario.index') }}">Libro Diario</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('libro-mayor.index') }}">Libro Mayor</a>
-                                            </li>
-                                            
-                                            
-                                            
-                                           
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-3" aria-controls="submenu-1-2">Contabilidad</a>
-                                    <div id="submenu-1-3" class="collapse submenu">
-                                        <ul class="nav flex-column">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('comprobante.index') }}">Comprobante</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                        
                         <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fa fa-fw fa-user-circle"></i>Cuentas <span class="badge badge-success">6</span></a>
                         <div id="submenu-6" class="collapse submenu">
                             <ul class="nav flex-column">

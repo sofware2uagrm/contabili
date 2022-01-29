@@ -28,13 +28,7 @@ class MonedaSeeder extends Seeder
         ]);
 
         DB::table('monedas')->insert([
-            'breve' => '$',
-            'descripcion' => 'Euro',
-            'predeterminado' => 1,
-        ]);
-
-        DB::table('monedas')->insert([
-            'breve' => '$',
+            'breve' => 'BS/$',
             'descripcion' => 'Bolivianos/Dolar',
             'predeterminado' => 1,
         ]);
