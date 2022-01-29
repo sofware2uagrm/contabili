@@ -1,6 +1,8 @@
 <div class="dashboard-header">
     <nav class="navbar navbar-expand-lg bg-white fixed-top">
         <a class="navbar-brand" href="{{route('home')}}">ICONTABSAYUBU {{date("Y")}}</a>
+        <h3>Actual Empresa Razon Social:</h3> <h2>{{session('nombre')}}       :</h2>
+        <button class="btn btn-secondary">Cambiar Empresa</button>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

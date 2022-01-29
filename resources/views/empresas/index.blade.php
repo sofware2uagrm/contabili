@@ -2,23 +2,23 @@
 @section('title')
     <title>Empresa</title>
 @endsection
-
-
 @section('content')
 
-
-      
- @if(Session::has('mensaje'))
+@if(Session::has('mensaje'))
 {{Session::get('mensaje')}}
 @endif
 <div class="card">
-    <div class="card-header">
-        <strong> Razon Social:{{session('nombre')}}</strong> 
-        <strong> Razon Social:{{session('empresa_id')}}</strong> 
-        
-        <br>
-    <a class="btn btn-secondary" href="{{url('/empresas/create')}}">NUEVO  REGISTRO</a>
-    </div>
+    <div class="card-header">    
+            <div class="row">
+                <div class="col-3">
+                    <h2>Listado de Empresa</h2>
+                </div>
+            
+                <div class=" col">
+                        <a class="btn-lg btn-secondary ml-auto" href="{{url('/empresas/create')}}">Nuevo Registro</a>
+                </div>    
+            </div>
+        </div>
     <div class="card-body">
 
  
@@ -50,7 +50,7 @@
             <tr>
                 <td> <p class="font-italic "> {{ $empresa->idEmpresa}}</p></td>
                 <td> 
-                <img src="{{Storage::url($empresa->logo)}}" width="100" alt="">    
+                <img src="{{Storage::url($empresa->logo)}}" width="94" alt="">    
                 </td>
 
                 <td class="font-italic  "> {{ $empresa->razonsocial}}</td>
@@ -72,11 +72,12 @@
 
         {{--       <td class="font-italic ">{{ $empresa->ci_responsable}}</td> --}}
                 <td>
-                    <a class ="btn btn-primary btn-sm" href="{{ route('empresas.edit',$empresa) }}">Editar</a>   
-                    <a class ="btn btn-primary btn-sm" href="{{ route('empresas.show',$empresa) }}">Modifcar</a>   
-
-                {{-- </td>
-                <td>  --}}
+                    <a class =" btn-primary btn-sm" href="{{ route('empresas.edit',$empresa) }}">Editar</a>   
+                   <br>
+                    <a class =" btn-secondary btn-sm" href="{{ route('empresas.show',$empresa) }}">Modificar</a>   
+                    <br>
+                    <a class =" btn-success btn-sm" href="{{ route('empresas.show',$empresa) }}">Desactivar</a>   
+<br>
                     <form action="{{ route('empresas.destroy',$empresa) }}" method="post">
                     @csrf
                     {{method_field('DELETE')}} 

@@ -25,5 +25,10 @@ class UserSeeder extends Seeder
             "x_fecha" => $mytime->toDateString(),
             "x_hora"  => $mytime->toTimeString(),
         ]);
+        User::create([
+            'name' => 'user',
+            'email' => 'leonel@gmail.com',
+            'password' => Hash::make('12345678'),
+        ]);
     }
 }

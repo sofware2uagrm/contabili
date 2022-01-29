@@ -62,10 +62,7 @@ class EmpresaController extends Controller
 
     public function update(Request $request, Empresa $empresa)
      {  
-            $datosEmpresa= request()->except(['_token','_method']);
-           // return $datosEmpresa;
-            print ($empresa);
-            //  $empresa=Empresa::findOrFail($empresa->idEmpresa);
+        $datosEmpresa= request()->except(['_token','_method']);
         if($request->hasFile('logo')){
             Storage::delete('public/'.$empresa->logo);
             $datosEmpresa['logo']=$request->file('logo')->store('uploads','public');

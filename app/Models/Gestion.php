@@ -9,5 +9,5 @@ class Gestion extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $fillable =['descripcion','fecha_ini','fecha_fin'];  
+    protected $fillable =['descripcion','fecha_ini','fecha_fin','idEmpresa'];  
 }
