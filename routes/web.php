@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ActualController;
+<<<<<<< HEAD
+use App\Http\Controllers\CompraController;
+use App\Http\Controllers\VentaController;
+
+=======
 //lucas
 use App\Http\Controllers\AsientoLCVController;
 use App\Http\Controllers\FormatoDocController;
@@ -21,6 +26,7 @@ use App\Http\Controllers\FirmaReporteController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\TiponivelController;
 use App\Http\Controllers\MonedaController;
+>>>>>>> d32a37729db7e9708447bba4675f61e8c1128a0f
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +45,10 @@ Route::get('prueba',function (){
 Route::get('/', function () {
     return redirect('/login');
 });
+Route::get('compra/export-excel', [CompraController::class, 'exportExcel']); 
+Route::get('venta/export-excel', [VentaController::class, 'exportExcel']); 
+
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -75,6 +85,16 @@ Route::group(['middleware' => 'auth'], function () {
   ///
     Route::resource('empresas', EmpresaController::class)->names('empresas');
     Route::resource('gestions', GestionController::class)->names('gestions');
+<<<<<<< HEAD
+    Route::get('datosdelaempresa',[ActualController::class,'empresaactual'])->name('datosdelaempresa');
+    Route::get('gestiondelaempresa',[ActualController::class,'gestionactual'])->name('gestiondelaempresa');
+
+    Route::resource('compra',CompraController::class)->names('compra');
+    Route::resource('venta',VentaController::class)->names('venta');
+    
+    
+
+=======
    Route::resource('acempresas',AcEmpresaController::class)->names('acempresas');
     //de lucas 
     Route::resource('moneda', MonedaController::class);
@@ -94,6 +114,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('tipoNivel', TiponivelController::class);
     Route::post('tipoNivel/update/{tiponivel}',[ TiponivelController::class , 'update']);
+>>>>>>> d32a37729db7e9708447bba4675f61e8c1128a0f
      
 });
 
