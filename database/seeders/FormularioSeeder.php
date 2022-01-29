@@ -211,6 +211,132 @@ class FormularioSeeder extends Seeder
                 "x_fecha" => $mytime->toDateString(),
                 "x_hora"  => $mytime->toTimeString(),
             ], //18
+
+            [
+                "fkidformulariopadre" => 3,
+                "x_idusuario" => null,
+
+                "descripcion" => "Plan De Cuentas",
+                "activo" => "A",
+
+                "x_fecha" => $mytime->toDateString(),
+                "x_hora"  => $mytime->toTimeString(),
+            ], //19
+            [
+                "fkidformulariopadre" => 3,
+                "x_idusuario" => null,
+
+                "descripcion" => "Libro Diario",
+                "activo" => "A",
+
+                "x_fecha" => $mytime->toDateString(),
+                "x_hora"  => $mytime->toTimeString(),
+            ], //20
+            [
+                "fkidformulariopadre" => 3,
+                "x_idusuario" => null,
+
+                "descripcion" => "Libro Mayor",
+                "activo" => "A",
+
+                "x_fecha" => $mytime->toDateString(),
+                "x_hora"  => $mytime->toTimeString(),
+            ], //21
+            [
+                "fkidformulariopadre" => 3,
+                "x_idusuario" => null,
+
+                "descripcion" => "Compras",
+                "activo" => "A",
+
+                "x_fecha" => $mytime->toDateString(),
+                "x_hora"  => $mytime->toTimeString(),
+            ], //22
+            [
+                "fkidformulariopadre" => 3,
+                "x_idusuario" => null,
+
+                "descripcion" => "Ventas",
+                "activo" => "A",
+
+                "x_fecha" => $mytime->toDateString(),
+                "x_hora"  => $mytime->toTimeString(),
+            ], //23
+
+            [
+                "fkidformulariopadre" => 2,
+                "x_idusuario" => null,
+
+                "descripcion" => "Contabilidad",
+                "activo" => "A",
+
+                "x_fecha" => $mytime->toDateString(),
+                "x_hora"  => $mytime->toTimeString(),
+            ], //24
+            [
+                "fkidformulariopadre" => 24,
+                "x_idusuario" => null,
+
+                "descripcion" => "Comprobante",
+                "activo" => "A",
+
+                "x_fecha" => $mytime->toDateString(),
+                "x_hora"  => $mytime->toTimeString(),
+            ], //25
+
+            [
+                "fkidformulariopadre" => null,
+                "x_idusuario" => null,
+
+                "descripcion" => "Gestion",
+                "activo" => "A",
+
+                "x_fecha" => $mytime->toDateString(),
+                "x_hora"  => $mytime->toTimeString(),
+            ], //26
+            [
+                "fkidformulariopadre" => 26,
+                "x_idusuario" => null,
+
+                "descripcion" => "Fecha De Inicio De Gestion Contable",
+                "activo" => "A",
+
+                "x_fecha" => $mytime->toDateString(),
+                "x_hora"  => $mytime->toTimeString(),
+            ], //27
+            [
+                "fkidformulariopadre" => 26,
+                "x_idusuario" => null,
+
+                "descripcion" => "Datos Generales de la Empresa",
+                "activo" => "A",
+
+                "x_fecha" => $mytime->toDateString(),
+                "x_hora"  => $mytime->toTimeString(),
+            ], //28
+
+            [
+                "fkidformulariopadre" => null,
+                "x_idusuario" => null,
+
+                "descripcion" => "Sistema",
+                "activo" => "A",
+
+                "x_fecha" => $mytime->toDateString(),
+                "x_hora"  => $mytime->toTimeString(),
+            ], //29
+
+            [
+                "fkidformulariopadre" => 29,
+                "x_idusuario" => null,
+
+                "descripcion" => "Configuracion De Parametros del Sistema",
+                "activo" => "A",
+
+                "x_fecha" => $mytime->toDateString(),
+                "x_hora"  => $mytime->toTimeString(),
+            ], //30
+
         ];
     }
 }

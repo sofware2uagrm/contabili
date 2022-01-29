@@ -30,54 +30,63 @@
                     </li>
                     <li class="nav-item ">
                         
-                        <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fa fa-fw fa-user-circle"></i>Cuentas <span class="badge badge-success">6</span></a>
-                        <div id="submenu-6" class="collapse submenu">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-4" aria-controls="submenu-1-2">Cuentas</a>
-                                    <div id="submenu-1-4" class="collapse submenu">
-                                        <ul class="nav flex-column">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('plan.index') }}">Plan De Cuentas</a>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('libro-diario.index') }}">Libro Diario</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('libro-mayor.index') }}">Libro Mayor</a>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('compra.index') }}">Compras</a>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('venta.index') }}">Ventas</a>
-                                            </li>
-                                            
-                                            
-                                            
-                                           
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-3" aria-controls="submenu-1-2">Contabilidad</a>
-                                    <div id="submenu-1-3" class="collapse submenu">
-                                        <ul class="nav flex-column">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="{{ route('comprobante.index') }}">Comprobante</a>
-                                            </li>
-                                          
-                                            
-                                           
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fa fa-fw fa-user-circle"></i>Comprobante <span class="badge badge-success">6</span></a>
+                        @if ( $arrayPermiso[1]->visible == "A" )
+                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fa fa-fw fa-user-circle"></i>Cuentas <span class="badge badge-success">6</span></a>
+                            <div id="submenu-6" class="collapse submenu">
+                                <ul class="nav flex-column">
+                                    @if ( $arrayPermiso[2]->visible == "A" )
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-4" aria-controls="submenu-1-2">Cuentas</a>
+                                            <div id="submenu-1-4" class="collapse submenu">
+                                                <ul class="nav flex-column">
+                                                    @if ( $arrayPermiso[18]->visible == "A" )
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" href="{{ route('plan.index') }}">Plan De Cuentas</a>
+                                                        </li>
+                                                    @endif
+                                                    @if ( $arrayPermiso[19]->visible == "A" )
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" href="{{ route('libro-diario.index') }}">Libro Diario</a>
+                                                        </li>
+                                                    @endif
+                                                    @if ( $arrayPermiso[20]->visible == "A" )
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" href="{{ route('libro-mayor.index') }}">Libro Mayor</a>
+                                                        </li>
+                                                    @endif
+                                                    @if ( $arrayPermiso[21]->visible == "A" )
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" href="{{ route('compra.index') }}">Compras</a>
+                                                        </li>
+                                                    @endif
+                                                    @if ( $arrayPermiso[22]->visible == "A" )
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" href="{{ route('venta.index') }}">Ventas</a>
+                                                        </li>
+                                                    @endif
+                                                    
+                                                
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    @endif
+                                    @if ( $arrayPermiso[23]->visible == "A" )
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-3" aria-controls="submenu-1-2">Contabilidad</a>
+                                            <div id="submenu-1-3" class="collapse submenu">
+                                                <ul class="nav flex-column">
+                                                    @if ( $arrayPermiso[24]->visible == "A" )
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" href="{{ route('comprobante.index') }}">Comprobante</a>
+                                                        </li>
+                                                    @endif
+                                                </ul>
+                                            </div>
+                                        </li>
+                                </ul>
+                            </div>
+                        @endif
+                        <!-- <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fa fa-fw fa-user-circle"></i>Comprobante <span class="badge badge-success">6</span></a>
                         <div id="submenu-5" class="collapse submenu">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
@@ -95,26 +104,37 @@
                                     <a class="nav-link" href="{{ route('libro-mayor.index') }}">Libro Mayor</a>
                                 </li>
                             </ul>
-                        </div>
-                        <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fa fa-fw fa-user-circle"></i>Gestion <span class="badge badge-success">6</span></a>
-                        <div id="submenu-3" class="collapse submenu">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('gestions.index') }}">Fecha De Inicio De Gestion Contable</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('empresas.index') }}">Datos Generales De La Empresa</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-user-circle"></i>Sistema <span class="badge badge-success">6</span></a>
-                        <div id="submenu-2" class="collapse submenu">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ asset('moneda') }}">Configuracion De Parametros Del Sistema</a>
-                                </li>
-                            </ul>
-                        </div>
+                        </div> -->
+                        @if ( $arrayPermiso[25]->visible == "A" )
+                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fa fa-fw fa-user-circle"></i>Gestion <span class="badge badge-success">6</span></a>
+                            <div id="submenu-3" class="collapse submenu">
+                                <ul class="nav flex-column">
+                                    @if ( $arrayPermiso[26]->visible == "A" )
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('gestions.index') }}">Fecha De Inicio De Gestion Contable</a>
+                                        </li>
+                                    @endif
+                                    @if ( $arrayPermiso[27]->visible == "A" )
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('empresas.index') }}">Datos Generales De La Empresa</a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        @endif
+
+                        @if ( $arrayPermiso[28]->visible == "A" )
+                            <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-user-circle"></i>Sistema <span class="badge badge-success">6</span></a>
+                            <div id="submenu-2" class="collapse submenu">
+                                <ul class="nav flex-column">
+                                    @if ( $arrayPermiso[29]->visible == "A" )
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ asset('moneda') }}">Configuracion De Parametros Del Sistema</a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        @endif
 
                         @if ( $arrayPermiso[0]->visible == "A" )
 
