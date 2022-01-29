@@ -20,6 +20,11 @@ class DatabaseSeeder extends Seeder
         $this->call(ComprobanteTipoSeeder::class);
         $this->call(EspecificaSeeder::class);
         $this->call(ConfiguracionDeParametrosDelSistemaSeeder::class);
+
+        $this->call(GrupoUsuarioSeeder::class);
+        $this->call(FormularioSeeder::class);
+        $this->call(AsignarFormularioSeeder::class);
+        
         
     }
 }
