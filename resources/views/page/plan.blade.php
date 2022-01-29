@@ -1,18 +1,13 @@
 @extends('layouts.home')
 
 @section('title')
-    <title>Page Plan</title>
+    <title>Plan De Cuentas</title>
 @endsection
 
-@section('breadcrumb')
-    @include('temp.breadcrumb',[
-        "title"=> "Plan de Cuentas",
-        "page"=>"Dashboard",
-        "subPage"=>"Cuenta Plan",
-    ])
-@endsection
+
 
 
 @section('content')
+<h1>Plan De Cuentas</h1>
     @livewire('plan.index', ['user' => Auth::user()->id])
 @endsection

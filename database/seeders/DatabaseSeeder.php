@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MonedaSeeder::class);
         $this->call(ComprobanteTipoSeeder::class);
         $this->call(EspecificaSeeder::class);
+        $this->call(ConfiguracionDeParametrosDelSistemaSeeder::class);
         
     }
 }

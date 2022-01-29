@@ -13,7 +13,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ActualController;
-
+//lucas
+use App\Http\Controllers\AsientoLCVController;
+use App\Http\Controllers\FormatoDocController;
+use App\Http\Controllers\FirmaReporteController;
+use App\Http\Controllers\ProyectoController;
+use App\Http\Controllers\TiponivelController;
+use App\Http\Controllers\MonedaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,6 +60,25 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('gestions', GestionController::class)->names('gestions');
     Route::get('datosdelaempresa',[ActualController::class,'empresaactual'])->name('datosdelaempresa');
     Route::get('gestiondelaempresa',[ActualController::class,'gestionactual'])->name('gestiondelaempresa');
+
+    //de lucas 
+    Route::resource('moneda', MonedaController::class);
+    Route::post('moneda/update/{moneda}',[ MonedaController::class , 'update']);
+
+    Route::resource('formatoDocumento', FormatoDocController::class);
+    Route::post('formatoDocumento/update/{formato_doc}',[ FormatoDocController::class , 'update']);
+
+    Route::resource('firmaReporte', FirmaReporteController::class);
+    Route::post('firmaReporte/update/{firma_reporte}',[ FirmaReporteController::class , 'update']);
+
+    Route::resource('proyecto', ProyectoController::class);
+    Route::post('proyecto/update/{proyecto}',[ ProyectoController::class , 'update']);
+
+    Route::resource('asientoLCV', AsientoLCVController::class);
+    Route::post('asientoLCV/update/{asiento_LCV}',[ AsientoLCVController::class , 'update']);
+
+    Route::resource('tipoNivel', TiponivelController::class);
+    Route::post('tipoNivel/update/{tiponivel}',[ TiponivelController::class , 'update']);
      
 });
 

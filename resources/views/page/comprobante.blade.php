@@ -4,14 +4,9 @@
 @endsection
 
 
-@section('breadcrumb')
-    @include('temp.breadcrumb',[
-        "title"=> "Comprobante",
-        "page"=>"Dashboard",
-        "subPage"=>"Comprobante",
-    ])
-@endsection
+
 
 @section('content')
+<h1>Comprobante</h1>
     @livewire('comprobante.index', ['user' => Auth::user()->id])    
 @endsection

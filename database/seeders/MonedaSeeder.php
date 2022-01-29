@@ -13,19 +13,29 @@ class MonedaSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {//modifique y aumente datos LUCAS
         DB::table('monedas')->insert([
             'breve' => 'BS',
             'descripcion' => 'Bolivianos',
-            'breve' => 0,
             'predeterminado' => 1,
+            'estado'=>1
         ]);
 
         DB::table('monedas')->insert([
             'breve' => '$',
             'descripcion' => 'Dolar',
-            'breve' => 0,
-            'breve' => 1,
+            'predeterminado' => 1,
+        ]);
+
+        DB::table('monedas')->insert([
+            'breve' => '$',
+            'descripcion' => 'Euro',
+            'predeterminado' => 1,
+        ]);
+
+        DB::table('monedas')->insert([
+            'breve' => '$',
+            'descripcion' => 'Bolivianos/Dolar',
             'predeterminado' => 1,
         ]);
     }
