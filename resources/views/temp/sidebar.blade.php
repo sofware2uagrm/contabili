@@ -9,14 +9,14 @@
 
             <?php 
                 $usuario = auth()->user();
-                $perm = new App\Models\Seguridad\Formulario();
+                $perm = new App\Models\Seguridad\AsignarFormulario();
                 $arrayPermiso = $perm
+                    ->leftJoin( 'formulario', 'asignarformulario.fkidformulario', '=', 'formulario.idformulario' )
                     ->select( 
                         'formulario.idformulario', 'formulario.descripcion', 'formulario.activo',
-                        'asigform.visible' 
+                        'asignarformulario.visible', 'asignarformulario.idasignarformulario'
                     )
-                    ->leftJoin( 'asignarformulario as asigform', 'formulario.idformulario', '=', 'asigform.fkidformulario' )
-                    ->where( 'asigform.fkidgrupousuario', '=', $usuario->fkidgrupousuario )
+                    ->where( 'asignarformulario.fkidgrupousuario', '=', $usuario->fkidgrupousuario )
                     ->orderBy('formulario.idformulario', 'ASC')->get();
             ?>
 
@@ -26,40 +26,40 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav flex-column">
                     <li class="nav-divider">
-                      Razon Social:{{session('nombre')}}
+                      Razon Social:{{session('nombre')}} {{ sizeof( $arrayPermiso ) }}
                     </li>
                     <li class="nav-item ">
                         
-                        @if ( $arrayPermiso[1]->visible == "A" )
+                        @if ( isset($arrayPermiso[1]->visible) && $arrayPermiso[1]->visible == "A" )
                             <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fa fa-fw fa-user-circle"></i>Cuentas <span class="badge badge-success">6</span></a>
                             <div id="submenu-6" class="collapse submenu">
                                 <ul class="nav flex-column">
-                                    @if ( $arrayPermiso[2]->visible == "A" )
+                                    @if (  isset($arrayPermiso[2]->visible) && $arrayPermiso[2]->visible == "A" )
                                         <li class="nav-item">
                                             <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-4" aria-controls="submenu-1-2">Cuentas</a>
                                             <div id="submenu-1-4" class="collapse submenu">
                                                 <ul class="nav flex-column">
-                                                    @if ( $arrayPermiso[18]->visible == "A" )
+                                                    @if ( isset($arrayPermiso[18]->visible) && $arrayPermiso[18]->visible == "A" )
                                                         <li class="nav-item">
                                                             <a class="nav-link" href="{{ route('plan.index') }}">Plan De Cuentas</a>
                                                         </li>
                                                     @endif
-                                                    @if ( $arrayPermiso[19]->visible == "A" )
+                                                    @if ( isset($arrayPermiso[19]->visible) && $arrayPermiso[19]->visible == "A" )
                                                         <li class="nav-item">
                                                             <a class="nav-link" href="{{ route('libro-diario.index') }}">Libro Diario</a>
                                                         </li>
                                                     @endif
-                                                    @if ( $arrayPermiso[20]->visible == "A" )
+                                                    @if ( isset($arrayPermiso[20]->visible) && $arrayPermiso[20]->visible == "A" )
                                                         <li class="nav-item">
                                                             <a class="nav-link" href="{{ route('libro-mayor.index') }}">Libro Mayor</a>
                                                         </li>
                                                     @endif
-                                                    @if ( $arrayPermiso[21]->visible == "A" )
+                                                    @if ( isset($arrayPermiso[21]->visible) && $arrayPermiso[21]->visible == "A" )
                                                         <li class="nav-item">
                                                             <a class="nav-link" href="{{ route('compra.index') }}">Compras</a>
                                                         </li>
                                                     @endif
-                                                    @if ( $arrayPermiso[22]->visible == "A" )
+                                                    @if ( isset($arrayPermiso[22]->visible) && $arrayPermiso[22]->visible == "A" )
                                                         <li class="nav-item">
                                                             <a class="nav-link" href="{{ route('venta.index') }}">Ventas</a>
                                                         </li>
@@ -70,12 +70,12 @@
                                             </div>
                                         </li>
                                     @endif
-                                    @if ( $arrayPermiso[23]->visible == "A" )
+                                    @if ( isset($arrayPermiso[23]->visible) && $arrayPermiso[23]->visible == "A" )
                                         <li class="nav-item">
                                             <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-3" aria-controls="submenu-1-2">Contabilidad</a>
                                             <div id="submenu-1-3" class="collapse submenu">
                                                 <ul class="nav flex-column">
-                                                    @if ( $arrayPermiso[24]->visible == "A" )
+                                                    @if ( isset($arrayPermiso[24]->visible) && $arrayPermiso[24]->visible == "A" )
                                                         <li class="nav-item">
                                                             <a class="nav-link" href="{{ route('comprobante.index') }}">Comprobante</a>
                                                         </li>
@@ -83,6 +83,7 @@
                                                 </ul>
                                             </div>
                                         </li>
+                                    @endif
                                 </ul>
                             </div>
                         @endif
@@ -105,16 +106,16 @@
                                 </li>
                             </ul>
                         </div> -->
-                        @if ( $arrayPermiso[25]->visible == "A" )
+                        @if ( isset($arrayPermiso[25]->visible) &&  $arrayPermiso[25]->visible == "A" )
                             <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fa fa-fw fa-user-circle"></i>Gestion <span class="badge badge-success">6</span></a>
                             <div id="submenu-3" class="collapse submenu">
                                 <ul class="nav flex-column">
-                                    @if ( $arrayPermiso[26]->visible == "A" )
+                                    @if ( isset($arrayPermiso[26]->visible) && $arrayPermiso[26]->visible == "A" )
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('gestions.index') }}">Fecha De Inicio De Gestion Contable</a>
                                         </li>
                                     @endif
-                                    @if ( $arrayPermiso[27]->visible == "A" )
+                                    @if ( isset($arrayPermiso[27]->visible) && $arrayPermiso[27]->visible == "A" )
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('empresas.index') }}">Datos Generales De La Empresa</a>
                                         </li>
@@ -123,11 +124,11 @@
                             </div>
                         @endif
 
-                        @if ( $arrayPermiso[28]->visible == "A" )
+                        @if ( isset($arrayPermiso[28]->visible) && $arrayPermiso[28]->visible == "A" )
                             <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-user-circle"></i>Sistema <span class="badge badge-success">6</span></a>
                             <div id="submenu-2" class="collapse submenu">
                                 <ul class="nav flex-column">
-                                    @if ( $arrayPermiso[29]->visible == "A" )
+                                    @if ( isset($arrayPermiso[29]->visible) && $arrayPermiso[29]->visible == "A" )
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ asset('moneda') }}">Configuracion De Parametros Del Sistema</a>
                                         </li>
@@ -136,30 +137,30 @@
                             </div>
                         @endif
 
-                        @if ( $arrayPermiso[0]->visible == "A" )
+                        @if ( isset($arrayPermiso[0]->visible) && $arrayPermiso[0]->visible == "A" )
 
                             <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-7" aria-controls="submenu-7">
                                 <i class="fa fa-fw fa-user-circle"></i>Seguridad <span class="badge badge-success">6</span>
                             </a>
                             <div id="submenu-7" class="collapse submenu">
                                 <ul class="nav flex-column">
-                                    @if ( $arrayPermiso[4]->visible == "A" )
+                                    @if ( isset($arrayPermiso[4]->visible) && $arrayPermiso[4]->visible == "A" )
                                         <li class="nav-item">
                                             <a class="nav-link" href="/usuario/index">Usuario</a>
                                         </li>
                                     @endif
                                     
-                                    @if ( $arrayPermiso[8]->visible == "A" )
+                                    @if ( isset($arrayPermiso[8]->visible) && $arrayPermiso[8]->visible == "A" )
                                         <li class="nav-item">
                                             <a class="nav-link" href="/grupo_usuario/index">Grupo Usuario</a>
                                         </li>
                                     @endif
-                                    @if ( $arrayPermiso[13]->visible == "A" )
+                                    @if ( isset($arrayPermiso[13]->visible) && $arrayPermiso[13]->visible == "A" )
                                         <li class="nav-item">
                                             <a class="nav-link" href="/formulario/index">Formulario</a>
                                         </li>
                                     @endif
-                                    @if ( $arrayPermiso[17]->visible == "A" )
+                                    @if ( isset($arrayPermiso[17]->visible) && $arrayPermiso[17]->visible == "A" )
                                         <li class="nav-item">
                                             <a class="nav-link" href="/formulario/asignar">Asignar Formulario</a>
                                         </li>
