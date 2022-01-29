@@ -50,7 +50,7 @@
             <tr>
                 <td> <p class="font-italic "> {{ $empresa->idEmpresa}}</p></td>
                 <td> 
-                <img src="{{Storage::url($empresa->logo)}}" width="100" alt="">    
+                <img src="{{Storage::url($empresa->logo)}}" width="94" alt="">    
                 </td>
 
                 <td class="font-italic  "> {{ $empresa->razonsocial}}</td>
@@ -74,10 +74,10 @@
                 <td>
                     <a class =" btn-primary btn-sm" href="{{ route('empresas.edit',$empresa) }}">Editar</a>   
                    <br>
-                    <a class =" btn-secundary btn-sm" href="{{ route('empresas.show',$empresa) }}">Modifcar</a>   
-
-                {{-- </td>
-                <td>  --}}
+                    <a class =" btn-secondary btn-sm" href="{{ route('empresas.show',$empresa) }}">Modificar</a>   
+                    <br>
+                    <a class =" btn-success btn-sm" href="{{ route('empresas.show',$empresa) }}">Desactivar</a>   
+<br>
                     <form action="{{ route('empresas.destroy',$empresa) }}" method="post">
                     @csrf
                     {{method_field('DELETE')}} 
