@@ -1,75 +1,24 @@
 @extends('layouts.home')
 @section('title')
-    <title>Comprobante</title>
+    <title>Empresa</title>
 @endsection
-
-
-@section('breadcrumb')
-    @include('temp.breadcrumb',[
-        "title"=> "Comprobante",
-        "page"=>"Dashboard",
-        "subPage"=>"Comprobante",
-    ])
-@endsection
-
 @section('content')
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">   
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-
-
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
-
-<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
-
-<script>
-$(document).ready(function() {
-    $('#empresatable').DataTable(
-        {
-
-            responsive:true,
-            autoWhidh:false,
-        
-    
-        "language": {
-            "lengthMenu": "Mostrar _MENU_ registros por paginas",
-            "zeroRecords": "nada encontrado - disculpa",
-            "info": "Mostrando la pagina _PAGE_ de _PAGES_",
-            "infoEmpty": "No records available",
-            "infoFiltered": "(filtered from _MAX_ registros totales)",
-            'search':'buscar:',
-            'paginate':{
-            'next':'siguiente',
-            'previous':'anterior'
-        }
-        }
-            }    );
-} );
-
-
-
-
-</script>
-
-
-      
- @if(Session::has('mensaje'))
+@if(Session::has('mensaje'))
 {{Session::get('mensaje')}}
 @endif
 <div class="card">
-    <div class="card-header">
-        <strong> Razon Social:{{session('nombre')}}</strong> 
-        <br>
-    <a class="btn btn-secondary" href="{{url('/empresas/create')}}">NUEVO  REGISTRO</a>
-    </div>
+    <div class="card-header">    
+            <div class="row">
+                <div class="col-3">
+                    <h2>Listado de Empresa</h2>
+                </div>
+            
+                <div class=" col">
+                        <a class="btn-lg btn-secondary ml-auto" href="{{url('/empresas/create')}}">Nuevo Registro</a>
+                </div>    
+            </div>
+        </div>
     <div class="card-body">
 
  
@@ -99,9 +48,9 @@ $(document).ready(function() {
         <tbody>
             @foreach( $empresas as $empresa)
             <tr>
-                <td> <p class="font-italic "> {{ $empresa->id}}</p></td>
+                <td> <p class="font-italic "> {{ $empresa->idEmpresa}}</p></td>
                 <td> 
-                <img src="{{Storage::url($empresa->logo)}}" width="100" alt="">    
+                <img src="{{Storage::url($empresa->logo)}}" width="94" alt="">    
                 </td>
 
                 <td class="font-italic  "> {{ $empresa->razonsocial}}</td>
@@ -123,11 +72,12 @@ $(document).ready(function() {
 
         {{--       <td class="font-italic ">{{ $empresa->ci_responsable}}</td> --}}
                 <td>
-                    <a class ="btn btn-primary btn-sm" href="{{ route('empresas.edit',$empresa) }}">Editar</a>   
-                    <a class ="btn btn-primary btn-sm" href="{{ route('empresas.show',$empresa) }}">Modifcar</a>   
-
-                {{-- </td>
-                <td>  --}}
+                    <a class =" btn-primary btn-sm" href="{{ route('empresas.edit',$empresa) }}">Editar</a>   
+                   <br>
+                    <a class =" btn-secondary btn-sm" href="{{ route('empresas.show',$empresa) }}">Modificar</a>   
+                    <br>
+                    <a class =" btn-success btn-sm" href="{{ route('empresas.show',$empresa) }}">Desactivar</a>   
+<br>
                     <form action="{{ route('empresas.destroy',$empresa) }}" method="post">
                     @csrf
                     {{method_field('DELETE')}} 

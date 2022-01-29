@@ -26,7 +26,7 @@ class EmpresaSeeder extends Seeder
             'responsable' => 'Antonio Cuchi',
             'ci_responsable' => '883292991',
             'sucursal' => 'Sucursal 1',
-            'estado' => 1,
+            'estado' => 'activo',
             'idUser' => User::first()->id
         ]);
     }

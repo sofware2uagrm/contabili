@@ -1,22 +1,16 @@
 @extends('layouts.home')
 @section('title')
-    <title>Comprobante</title>
+    <title>Gestion</title>
 @endsection
 
-
-@section('breadcrumb')
-    @include('temp.breadcrumb',[
-        "title"=> "Comprobante",
-        "page"=>"Dashboard",
-        "subPage"=>"Comprobante",
-    ])
-@endsection
 
 @section('content')
 
 <div class="card">
-    <strong> Razon Social:{{session('nombre')}}</strong> 
-
+    <strong> Razon Social:{{session('nombre')}}id:{{session('empresa_id')}}</strong> 
+ 
+    <strong> </strong> 
+  
 <div><a class="btn btn-secondary" href="{{url('/gestions/create')}}">NUEVO  REGISTRO</a> </div>
 <table id="gestiontable" class="table table-light">
         <thead class="thead-light">
@@ -58,4 +52,4 @@
 </table>
 </div>
 
-@stop
+@endsection

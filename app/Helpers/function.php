@@ -10,8 +10,10 @@ use App\Models\Empresa;
 use App\Models\Especifica;
 use App\Models\Moneda;
 use App\Models\Factura;
+use App\Models\asiento_LCV;
 use App\Models\User;
 use PhpParser\Node\Expr\FuncCall;
+use Illuminate\Support\Facades\DB;
 
 function cuantas_plan_padre(){
         $cuenta_plan = CuentaPlan::whereNull('idPlanCuentaPadre')->get();
@@ -155,6 +157,83 @@ function cuantas_plan_padre(){
         return $response;
     }
 
+
+    function listadoFlujoEfectivo(){
+        $sql = "select *
+        FROM flujo_efectivo";
+        $comments = DB::select($sql);
+        return $comments;
+    }
+
+    function listadoMonedax(){
+        $sql = "select *
+        FROM monedas";
+        $comments = DB::select($sql);
+        return $comments;
+    }
+
+    function listadoRubrox(){
+        $sql = "select *
+        FROM rubro_ajuste";
+        $comments = DB::select($sql);
+        return $comments;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function listadoEfectivo(){
+        $sql = "SELECT c.idCuentaPlan as id,c.descripcion as nombre ,f.id_flujo_efectivo,
+        f.nombre as descripcion
+        FROM cuenta_plan c
+        LEFT JOIN flujo_efectivo f
+        ON f.id_flujo_efectivo = c.id_flujo_efectivo
+        ORDER by c.idCuentaPlan ASC";
+        $comments = DB::select($sql);
+        return $comments;
+    }
+    function listadoMoneda(){
+        $sql = "SELECT c.idCuentaPlan id , c.descripcion as name , m.descripcion description, m.idMoneda as id_moneda
+        FROM cuenta_plan c 
+        LEFT JOIN monedas m
+ON m.idMoneda = c.idMoneda
+ORDER BY idCuentaPlan ASC";
+        $comments = DB::select($sql);
+        return $comments;
+    }
+    function listadoRubro(){
+        $sql = "SELECT c.idCuentaPlan id , c.descripcion as name , r.nombre description,r.id_rubro_ajuste
+        FROM cuenta_plan c
+LEFT JOIN rubro_ajuste r   
+     ON r.id_rubro_ajuste = c.id_rubro_ajuste
+     ORDER BY c.idCuentaPlan ASC";
+        $comments = DB::select($sql);
+        return $comments;
+    }
+    function listadoAll(){
+        $sql = "SELECT  c.idCuentaPlan,c.descripcion, f.nombre as fluName,  r.nombre as rubName , m.descripcion as monName
+        FROM cuenta_plan c 
+        LEFT JOIN flujo_efectivo f
+        ON f.id_flujo_efectivo = c.id_flujo_efectivo
+        LEFT JOIN rubro_ajuste r
+        ON r.id_rubro_ajuste = c.id_rubro_ajuste
+        LEFT JOIN monedas m 
+        ON m.idMoneda = c.idMoneda
+        ORDER BY idCuentaPlan ASC";
+        $comments = DB::select($sql);
+        return $comments;
+    }
+
+
     
 
 
@@ -247,8 +326,14 @@ function cuantas_plan_padre(){
     }
 
     function get_iva($totalfactura){
+       //agreado por lucas
+        $n=asiento_LCV::all();
+        $n=$n->where('id',1)->first();
+        $n=$n->credito_Fiscal;
+      //asta aqui
+
         if($totalfactura!=0){
-            $valor=(float)$totalfactura*(13/100);
+            $valor=(float)$totalfactura*($n/100);
             return redondear_dos_decimal($valor);
         }
         
@@ -476,3 +561,15 @@ function cuantas_plan_padre(){
 
        return $comprobante;
     }
+
+
+
+    function empresa__actual($empresa_id)
+{
+    return Empresa::findOrFail($empresa_id);
+    }
+
+    function empresas_user($user_id)
+    {
+        return Empresa::where('idUser','=',$user_id)->get();
+        }

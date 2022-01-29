@@ -15,10 +15,11 @@ class CreateGestionsTable extends Migration
     {
         Schema::create('gestions', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion');
-            $table->date('fecha_ini');
-            $table->date('fecha_fin');
-            $table->unsignedBigInteger('empresa_id')->nullable();
+            $table->string('descripcion')->nullable();
+            $table->string('fecha_ini')->nullable();
+            $table->string('fecha_fin')->nullable();
+              $table->integer('empresa_id')->unsigned()->nullable();
+                $table->foreign('empresa_id')->on('empresas')->references('idEmpresa')->onDelete('cascade');
             $table->timestamps();
         });
     }

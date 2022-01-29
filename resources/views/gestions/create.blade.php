@@ -1,22 +1,15 @@
 @extends('layouts.home')
 @section('title')
-    <title>Comprobante</title>
+    <title>Gestion</title>
 @endsection
 
-
-@section('breadcrumb')
-    @include('temp.breadcrumb',[
-        "title"=> "Comprobante",
-        "page"=>"Dashboard",
-        "subPage"=>"Comprobante",
-    ])
-@endsection
 
 @section('content')
+<h1>Crear Gestion</h1>
 
 <form action="{{ route('gestions.store' ) }}" method="post"  enctype="multipart/form-data">
 @csrf
 @include('gestions.form',['modo'=>'Crear']);
 </form>
 
-@stop
+@endsection

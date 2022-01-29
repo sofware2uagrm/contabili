@@ -9,9 +9,9 @@
 
                
                 <div class="form-group">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="login" autofocus>
                 </div>
-                @error('email')
+                @error('login')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -33,11 +33,11 @@
                             {{ __('Ingresar') }}
                         </button>
 
-                        @if (Route::has('password.request'))
+                        <!-- @if (Route::has('password.request'))
                             <a class="btn btn-link" href="{{ route('password.request') }}">
                                 {{ __('Olvidaste tu contraseña') }}
                             </a>
-                        @endif
+                        @endif -->
                     </div>
                 </div>
                 
@@ -45,7 +45,7 @@
         </div>
         <div class="card-footer bg-white p-0  ">
             <div class="card-footer-item card-footer-item-bordered">
-                <a href="{{ url('register') }}" class="footer-link">Crear una cuenta</a></div>
+                <!-- <a href="{{ url('register') }}" class="footer-link">Crear una cuenta</a></div> -->
             <!--<div class="card-footer-item card-footer-item-bordered">
                 <a href="#" class="footer-link">Forgot Password</a>
             </div>-->
