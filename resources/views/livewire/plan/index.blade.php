@@ -483,7 +483,7 @@
 
                                                                     <div class="form-group">
                                                                         <label for="">Codigo Cuenta</label>
-                                                                        <input type="text" name="" id=""  value="{{$key1+1}}0{{$key2+1}}" class="form-control" placeholder="" aria-describedby="helpId">
+                                                                        <input type="text" name="codigo2" id="codigo2"  value="{{$key1+1}}0{{$key2+1}}" class="form-control" placeholder="" aria-describedby="helpId">
                                                                     </div>
 
                                                                     
@@ -495,7 +495,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button wire:click='update_nuvel2({{$cuenta2->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                                                                    <button wire:click='update_nuvel2(({{$key1+1}}0{{$key2+1}}), {{$cuenta2->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -646,7 +646,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                    <button wire:click='update_nuvel3({{$cuenta3->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                                                                                    <button wire:click='update_nuvel3(({{$key1+1}}0{{$key2+1}}0{{$key3+1 }}),{{$cuenta3->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -799,7 +799,7 @@
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div class="modal-footer">
-                                                                                                <button wire:click='update_nuvel4({{$cuenta4->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                                                                                                <button wire:click='update_nuvel4(({{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}),{{$cuenta4->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -887,7 +887,7 @@
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                             <div class="modal-footer">
-                                                                                                                <button wire:click='update_nuvel5({{$cuenta5->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                                                                                                                <button wire:click='update_nuvel5(({{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}0{{$key5+1}}),{{$cuenta5->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>
