@@ -50,6 +50,14 @@
                                             <li class="nav-item">
                                                 <a class="nav-link" href="{{ route('libro-mayor.index') }}">Libro Mayor</a>
                                             </li>
+
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('compra.index') }}">Compras</a>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('venta.index') }}">Ventas</a>
+                                            </li>
                                             
                                             
                                             

@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ActualController;
+use App\Http\Controllers\CompraController;
+use App\Http\Controllers\VentaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,10 @@ Route::get('prueba',function (){
 Route::get('/', function () {
     return redirect('/login');
 });
+Route::get('compra/export-excel', [CompraController::class, 'exportExcel']); 
+Route::get('venta/export-excel', [VentaController::class, 'exportExcel']); 
+
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -54,6 +60,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('gestions', GestionController::class)->names('gestions');
     Route::get('datosdelaempresa',[ActualController::class,'empresaactual'])->name('datosdelaempresa');
     Route::get('gestiondelaempresa',[ActualController::class,'gestionactual'])->name('gestiondelaempresa');
+
+    Route::resource('compra',CompraController::class)->names('compra');
+    Route::resource('venta',VentaController::class)->names('venta');
+    
+    
+
      
 });
 
