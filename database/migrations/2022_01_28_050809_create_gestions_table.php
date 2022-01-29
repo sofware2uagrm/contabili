@@ -18,7 +18,7 @@ class CreateGestionsTable extends Migration
             $table->string('descripcion')->nullable();
             $table->string('fecha_ini')->nullable();
             $table->string('fecha_fin')->nullable();
-            $table->string('empresa_id')->nullable();
+            $table->unsignedBigInteger  ('empresa_id')->nullable();
             $table->timestamps();
         });
     }
