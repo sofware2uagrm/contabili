@@ -35,6 +35,7 @@ class UsuarioShowPrivate extends Component {
             login: "",
             password: "",
             imagen: "",
+            grupousuario: "",
 
             arrayGrupoUsuario: [],
         };
@@ -64,6 +65,7 @@ class UsuarioShowPrivate extends Component {
                     apellido: resp.data.usuario.apellido,
                     email: resp.data.usuario.email,
                     login: resp.data.usuario.login,
+                    grupousuario: resp.data.usuario.grupousuario ? resp.data.usuario.grupousuario : "",
 
                     arrayGrupoUsuario: resp.data.arrayGrupoUsuario,
                 } );
@@ -149,7 +151,17 @@ class UsuarioShowPrivate extends Component {
                         </Col>
                     </Row>
                     <Row gutter={[16, 24]} style={ { marginTop: 20,} }>
-                        <Col sm={ { span: 8, } } ></Col>
+                        <Col sm={ { span: 4, } } ></Col>
+                        <Col xs={{ span: 24, }} sm={ { span: 8, } } >
+                            <TextField
+                                fullWidth
+                                label="Grupo Usuario" size="small"
+                                value={this.state.grupousuario}
+                                InputProps={ {
+                                    readOnly: true,
+                                } }
+                            />
+                        </Col>
                         <Col xs={{ span: 24, }} sm={ { span: 8, } } >
                             <TextField
                                 fullWidth
@@ -162,7 +174,7 @@ class UsuarioShowPrivate extends Component {
                         </Col>
                     </Row>
 
-                    <Row gutter={[16, 24]} style={ { marginTop: 20, } }>
+                    {/* <Row gutter={[16, 24]} style={ { marginTop: 20, } }>
                         <Col xs={{ span: 24, }} >
                             <Table columns={this.columnsGrupoUsuario} dataSource={this.state.arrayGrupoUsuario} 
                                 bordered style={ { width: '100%', minWidth: '100%', } } pagination={false}
@@ -170,7 +182,7 @@ class UsuarioShowPrivate extends Component {
                                 title={() => 'ROL DEL USUARIO'}
                             />
                         </Col>
-                    </Row>
+                    </Row> */}
 
                 </Card>
             </>

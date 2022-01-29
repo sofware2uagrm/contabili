@@ -9,7 +9,10 @@
 
                
                 <div class="form-group">
-                    <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required autocomplete="login" autofocus>
+                    <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" 
+                        name="login" value="{{ old('login') }}" required autocomplete="login" autofocus
+                        placeholder="INGRESAR USUARIO"
+                    />
                 </div>
                 @error('login')
                     <span class="invalid-feedback" role="alert">
@@ -18,7 +21,10 @@
                 @enderror
 
                 <div class="form-group">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
+                        name="password" required autocomplete="current-password"
+                        placeholder="INGRESAR CONTRASEÑA"
+                    />
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

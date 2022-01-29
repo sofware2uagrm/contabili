@@ -33,12 +33,15 @@ class UsuarioEditPrivate extends Component {
 
             showPassword: false,
 
+            arrayGrupoUsuario: [],
+
             nombre: "",
             apellido: "",
             email: "",
             login: "",
             password: "",
             imagen: "",
+            fkidgrupousuario: "",
 
             errornombre: false,
             errorapellido: false,
@@ -57,9 +60,11 @@ class UsuarioEditPrivate extends Component {
             if ( resp.data.rpta === 1 ) {
                 this.setState( {
                     nombre: resp.data.usuario.name,
-                    apellido: resp.data.usuario.apellido,
+                    apellido: resp.data.usuario.apellido ? resp.data.usuario.apellido : "",
                     email: resp.data.usuario.email,
                     login: resp.data.usuario.login,
+                    fkidgrupousuario: resp.data.usuario.fkidgrupousuario ? resp.data.usuario.fkidgrupousuario : "",
+                    arrayGrupoUsuario: resp.data.arrayGrupoUsuario,
                 } );
             }
             if ( resp.data.rpta === -1 ) {
@@ -116,6 +121,11 @@ class UsuarioEditPrivate extends Component {
             errorpassword: false,
         } );
     };
+    onChangeFkIDGrupoUsuario( evt ) {
+        this.setState( {
+            fkidgrupousuario: evt.target.value,
+        } );
+    };
     onValidate() {
         let isvalidate = false;
         if ( this.state.nombre.toString().trim().length === 0 ) {
@@ -166,6 +176,7 @@ class UsuarioEditPrivate extends Component {
             apellido: this.state.apellido,
             password: this.state.password,
             id: idusuario,
+            fkidgrupousuario: this.state.fkidgrupousuario,
         };
         this.setState( { disabled: true, } );
         axios.post( "/api/usuario/update", body ) . then ( ( resp ) => {
@@ -275,7 +286,26 @@ class UsuarioEditPrivate extends Component {
                         </Col>
                     </Row>
                     <Row gutter={[16, 24]} style={ { marginTop: 20,} }>
-                        <Col sm={ { span: 4, } } ></Col>
+                        <Col xs={{ span: 24, }} sm={ { span: 8, } } >
+                            <TextField
+                                fullWidth select focused
+                                label="Grupo Usuario" size="small"
+                                value={this.state.fkidgrupousuario}
+                                onChange={this.onChangeFkIDGrupoUsuario.bind(this)}
+                                SelectProps={ {
+                                    native: true,
+                                } }
+                            >
+                                <option value={""}>Ninguno</option>
+                                { this.state.arrayGrupoUsuario.map( ( item, index ) => {
+                                    return (
+                                        <option key={index} value={ item.idgrupousuario }>
+                                            { item.descripcion }
+                                        </option>
+                                    );
+                                } ) }
+                            </TextField>
+                        </Col>
                         <Col xs={{ span: 24, }} sm={ { span: 8, } } >
                             <TextField
                                 fullWidth

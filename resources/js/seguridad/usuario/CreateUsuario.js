@@ -33,6 +33,9 @@ class UsuarioCreatePrivate extends Component {
 
             showPassword: false,
 
+            arrayGrupoUsuario: [],
+            fkidgrupousuario: "",
+
             nombre: "",
             apellido: "",
             email: "",
@@ -50,7 +53,35 @@ class UsuarioCreatePrivate extends Component {
     componentDidMount() {
             this.get_data();
     };
-    get_data( ) {};
+    get_data( ) {
+        axios.get( "/api/usuario/create" ) . then ( ( resp ) => {
+            console.log(resp)
+            if ( resp.data.rpta === 1 ) {
+                this.setState( {
+                    arrayGrupoUsuario: resp.data.arrayGrupoUsuario,
+                } );
+            }
+            if ( resp.data.rpta === -5 ) {
+                Swal.fire( {
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: resp.data.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                } );
+            }
+
+        } ) . catch ( ( error ) => {
+            console.log(error);
+            Swal.fire( {
+                position: 'top-end',
+                icon: 'error',
+                title: 'Hubo problemas con el servidor',
+                showConfirmButton: false,
+                timer: 1500
+            } );
+        } );
+    };
     onChangeNombre( evt ) {
         this.setState( {
             nombre: evt.target.value,
@@ -79,6 +110,11 @@ class UsuarioCreatePrivate extends Component {
         this.setState( {
             password: evt.target.value,
             errorpassword: false,
+        } );
+    };
+    onChangeFkIDGrupoUsuario( evt ) {
+        this.setState( {
+            fkidgrupousuario: evt.target.value,
         } );
     };
     onValidate() {
@@ -151,6 +187,7 @@ class UsuarioCreatePrivate extends Component {
             apellido: this.state.apellido,
             login: this.state.login,
             password: this.state.password,
+            fkidgrupousuario: this.state.fkidgrupousuario,
             x_fecha: this.getDate(),
             x_hora: this.getTime(),
         };
@@ -253,7 +290,26 @@ class UsuarioCreatePrivate extends Component {
                         </Col>
                     </Row>
                     <Row gutter={[16, 24]} style={ { marginTop: 20,} }>
-                        <Col sm={ { span: 4, } } ></Col>
+                        <Col xs={{ span: 24, }} sm={ { span: 8, } } >
+                            <TextField
+                                fullWidth select focused
+                                label="Grupo Usuario" size="small"
+                                value={this.state.fkidgrupousuario}
+                                onChange={this.onChangeFkIDGrupoUsuario.bind(this)}
+                                SelectProps={ {
+                                    native: true,
+                                } }
+                            >
+                                <option value={""}>Ninguno</option>
+                                { this.state.arrayGrupoUsuario.map( ( item, index ) => {
+                                    return (
+                                        <option key={index} value={ item.idgrupousuario }>
+                                            { item.descripcion }
+                                        </option>
+                                    );
+                                } ) }
+                            </TextField>
+                        </Col>
                         <Col xs={{ span: 24, }} sm={ { span: 8, } } >
                             <TextField
                                 fullWidth

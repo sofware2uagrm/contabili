@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             'name' => 'user',
             'login' => 'admin',
             'email' => 'admin@gmail.com',
+            'fkidgrupousuario' => '1',
             'password' => Hash::make('12345678'),
             "x_fecha" => $mytime->toDateString(),
             "x_hora"  => $mytime->toTimeString(),

@@ -14,6 +14,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        $this->call(GrupoUsuarioSeeder::class);
+        $this->call(FormularioSeeder::class);
+        $this->call(AsignarFormularioSeeder::class);
+
         $this->call(UserSeeder::class);
         $this->call(EmpresaSeeder::class);
         $this->call(MonedaSeeder::class);
@@ -21,9 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EspecificaSeeder::class);
         $this->call(ConfiguracionDeParametrosDelSistemaSeeder::class);
 
-        $this->call(GrupoUsuarioSeeder::class);
-        $this->call(FormularioSeeder::class);
-        $this->call(AsignarFormularioSeeder::class);
         
         
     }

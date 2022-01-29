@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Seguridad;
 use App\Http\Controllers\Controller;
 use App\Models\Functions;
 use App\Models\Seguridad\AsignarUsuario;
+use App\Models\Seguridad\GrupoUsuario;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -80,10 +81,14 @@ class UsuarioController extends Controller
     public function create( Request $request )
     {
         try {
+
+            $grupouser = new GrupoUsuario();
+            $arraygrupousuario = $grupouser->get_data( $grupouser, $request );
             
             return response()->json( [
                 "rpta" => 1,
                 "message" => "Servicio realizado exitosamente",
+                "arrayGrupoUsuario" => $arraygrupousuario,
             ] );
 
         } catch (\Throwable $th) {
@@ -176,6 +181,7 @@ class UsuarioController extends Controller
             $email = isset( $request->email ) ? $request->email : null;
             $login = isset( $request->login ) ? $request->login : null;
             $imagen = isset( $request->imagen ) ? $request->imagen : null;
+            $fkidgrupousuario = isset( $request->fkidgrupousuario ) ? $request->fkidgrupousuario : null;
 
             $password = isset( $request->password ) ? $request->password : null;
 
@@ -188,6 +194,7 @@ class UsuarioController extends Controller
             $usuario->apellido = $apellido;
             $usuario->imagen = $imagen;
             $usuario->email = $email;
+            $usuario->fkidgrupousuario = $fkidgrupousuario;
             $usuario->login = $login;
             $usuario->password = bcrypt($password);
 
@@ -230,11 +237,13 @@ class UsuarioController extends Controller
 
             $usuario = $user
                 ->select( [
-                    'id', 'name', 'apellido', 'email', 'login', 'imagen',
-                    'estado', 'isdelete', 'x_fecha', 'x_hora',
+                    'users.id', 'users.name', 'users.apellido', 'users.email', 'users.login', 'users.imagen', 'users.fkidgrupousuario',
+                    'users.estado', 'users.isdelete', 'users.x_fecha', 'users.x_hora',
+                    'grupo.descripcion as grupousuario'
                 ] )
-                ->where('id', '=', $idusuario)
-                ->orderBy('id', 'ASC')
+                ->leftJoin( 'grupousuario as grupo', 'users.fkidgrupousuario', '=', 'grupo.idgrupousuario' )
+                ->where('users.id', '=', $idusuario)
+                ->orderBy('users.id', 'ASC')
                 ->first();
 
             $asiguser = new AsignarUsuario();
@@ -286,11 +295,13 @@ class UsuarioController extends Controller
 
             $usuario = $user
                 ->select( [
-                    'id', 'name', 'apellido', 'email', 'login', 'imagen',
-                    'estado', 'isdelete', 'x_fecha', 'x_hora',
+                    'users.id', 'users.name', 'users.apellido', 'users.email', 'users.login', 'users.imagen', 'users.fkidgrupousuario',
+                    'users.estado', 'users.isdelete', 'users.x_fecha', 'users.x_hora',
+                    'grupo.descripcion as grupousuario'
                 ] )
-                ->where('id', '=', $idusuario)
-                ->orderBy('id', 'ASC')
+                ->leftJoin( 'grupousuario as grupo', 'users.fkidgrupousuario', '=', 'grupo.idgrupousuario' )
+                ->where('users.id', '=', $idusuario)
+                ->orderBy('users.id', 'ASC')
                 ->first();
 
             if ( is_null( $usuario ) ) {
@@ -299,11 +310,15 @@ class UsuarioController extends Controller
                     "message" => "Usuario no existente",
                 ] );
             }
+
+            $grupouser = new GrupoUsuario();
+            $arraygrupousuario = $grupouser->get_data( $grupouser, $request );
             
             return response()->json( [
                 "rpta" => 1,
                 "message" => "Servicio realizado exitosamente",
                 "usuario" => $usuario,
+                "arrayGrupoUsuario" => $arraygrupousuario,
             ] );
 
         } catch (\Throwable $th) {
@@ -371,6 +386,7 @@ class UsuarioController extends Controller
 
             $name   = isset( $request->name ) ? $request->name : null;
             $apellido = isset( $request->apellido ) ? $request->apellido : null;
+            $fkidgrupousuario = isset( $request->fkidgrupousuario ) ? $request->fkidgrupousuario : null;
 
             $email = isset( $request->email ) ? $request->email : null;
             $imagen = isset( $request->imagen ) ? $request->imagen : null;
@@ -390,6 +406,7 @@ class UsuarioController extends Controller
             $usuario->name = $name;
             $usuario->apellido = $apellido;
             $usuario->imagen = $imagen;
+            $usuario->fkidgrupousuario = $fkidgrupousuario;
             $usuario->email = $email;
             $usuario->password = bcrypt($password);
 
