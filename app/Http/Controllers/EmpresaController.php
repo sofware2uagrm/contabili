@@ -47,10 +47,7 @@ class EmpresaController extends Controller
 
 
     public function show(Empresa $empresa)
-    {   session([
-            'empresa_id'=> "$empresa->idEmpresa",
-            'nombre'=>"$empresa->razonsocial"
-        ]);
+    {  
     return  redirect()->route('empresas.index');
     }
 

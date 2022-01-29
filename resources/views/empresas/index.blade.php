@@ -72,12 +72,10 @@
 
         {{--       <td class="font-italic ">{{ $empresa->ci_responsable}}</td> --}}
                 <td>
-                    <a class =" btn-primary btn-sm" href="{{ route('empresas.edit',$empresa) }}">Editar</a>   
-                   <br>
-                    <a class =" btn-secondary btn-sm" href="{{ route('empresas.show',$empresa) }}">Modificar</a>   
-                    <br>
+                    <a class =" btn-secondary btn-sm" href="{{ route('empresas.edit',$empresa) }}">Editar</a>   
+                    <br>{{-- 
                     <a class =" btn-success btn-sm" href="{{ route('empresas.show',$empresa) }}">Desactivar</a>   
-<br>
+                    <br> --}}
                     <form action="{{ route('empresas.destroy',$empresa) }}" method="post">
                     @csrf
                     {{method_field('DELETE')}} 
