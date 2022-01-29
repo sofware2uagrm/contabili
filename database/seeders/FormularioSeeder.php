@@ -38,7 +38,7 @@ class FormularioSeeder extends Seeder
                 "fkidformulariopadre" => null,
                 "x_idusuario" => null,
 
-                "descripcion" => "Administración",
+                "descripcion" => "SuMenu Cuentas",
                 "activo" => "A",
 
                 "x_fecha" => $mytime->toDateString(),
@@ -49,7 +49,7 @@ class FormularioSeeder extends Seeder
                 "fkidformulariopadre" => 2,
                 "x_idusuario" => null,
 
-                "descripcion" => "Plan de Cuenta",
+                "descripcion" => "Cuentas",
                 "activo" => "A",
 
                 "x_fecha" => $mytime->toDateString(),
