@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AcEmpresaController;
 use App\Http\Controllers\ComprobanteController;
 use App\Http\Controllers\CuentaPlanController;
 use App\Http\Controllers\CuentaPlanTipoController;
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ActualController;
+use App\Http\Controllers\CompraController;
+use App\Http\Controllers\VentaController;
+
 //lucas
 use App\Http\Controllers\AsientoLCVController;
 use App\Http\Controllers\FormatoDocController;
@@ -38,6 +42,10 @@ Route::get('prueba',function (){
 Route::get('/', function () {
     return redirect('/login');
 });
+Route::get('compra/export-excel', [CompraController::class, 'exportExcel']); 
+Route::get('venta/export-excel', [VentaController::class, 'exportExcel']); 
+
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -69,11 +77,20 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('comprobantesPdf/{desde}/{hasta}/{idComprobanteTipo}',[PdfController::class,'comprobantesPDF'])->name('comprobantes.pdf');
     Route::get('libroMayorPdf/{desde}/{hasta}/{idCuentaPlan}',[PdfController::class,'libroMayor'])->name('libro-mayor.pdf');
+  
+  
+  ///
     Route::resource('empresas', EmpresaController::class)->names('empresas');
     Route::resource('gestions', GestionController::class)->names('gestions');
     Route::get('datosdelaempresa',[ActualController::class,'empresaactual'])->name('datosdelaempresa');
     Route::get('gestiondelaempresa',[ActualController::class,'gestionactual'])->name('gestiondelaempresa');
 
+    Route::resource('compra',CompraController::class)->names('compra');
+    Route::resource('venta',VentaController::class)->names('venta');
+    
+    
+
+   Route::resource('acempresas',AcEmpresaController::class)->names('acempresas');
     //de lucas 
     Route::resource('moneda', MonedaController::class);
     Route::post('moneda/update/{moneda}',[ MonedaController::class , 'update']);
@@ -95,6 +112,7 @@ Route::group(['middleware' => 'auth'], function () {
      
 });
 
+Route::put('planUpdate',[CuentaPlanController::class,'editar']);
 Auth::routes();
 
 Route::get('/example',function (){

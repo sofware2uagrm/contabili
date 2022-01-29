@@ -9,6 +9,9 @@
                             <button wire:click='reset_nivel_1' type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#agregar">
                                 Agregar Cuenta
                             </button>
+                            <button wire:click='reset_nivel_1' type="button" tabindex="-1" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#listar">
+                                Configuracion
+                            </button>
                             <div wire:ignore.self class="modal fade" id="agregar" tabindex="-1" role="dialog"
                                 aria-labelledby="modelTitleId" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -221,6 +224,325 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
+                            
+<!------------------------------------- INICIO MODAL LISTADO------------------------------------------------->
+                    <div wire:ignore.self class="modal fade" id="listar" tabindex="-1" role="dialog"
+                    aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div style="width: 700px !important" class="modal-dialog" role="document">
+                        <div style="width: 700px !important;" class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Configuracion</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="bd-example bd-example-tabs">
+                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                          <li class="nav-item">
+                                            <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Flujo de Efectivo</a>
+                                          </li>
+                                          <li class="nav-item">
+                                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Moneda</a>
+                                          </li>
+                                          <li class="nav-item">
+                                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Rubo Ajuste</a>
+                                          </li>
+                                          <li class="nav-item">
+                                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#detail" role="tab" aria-controls="contact" aria-selected="false">Plan de cuentas en detalle</a>
+                                          </li>
+                                        </ul>
+                                        <div class="tab-content" id="myTabContent">
+                                          <div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                            <table class="table text-center">
+                                                <thead>
+                                                  <tr>
+                                                        <th scope="col">CUENTA</th>
+                                                    <th scope="col">NOMBRE DE CUENTA</th>
+                                                    <th scope="col">CLASIFICACION</th>
+                                                    <th scope="col">ACCION</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                            @foreach (listadoEfectivo() as  $cuenta12)
+                                                <tr class="container">
+                                                       <td>{{ $cuenta12->id }}</td>
+                                                       <td>{{ $cuenta12->nombre }}</td>
+                                                       <td>{{ $cuenta12->descripcion }}</td>
+                                                       
+                                                       <td>
+                                                            <button  onclick="mandar(<?php echo $cuenta12->id  ?>, <?php echo $cuenta12->id_flujo_efectivo ?>,'Efectivo')" type="button" tabindex="-1" class="btn btn-primary btn-sm modal-open" data-toggle="modal" data-target="#config">
+                                                                Configuracion
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                             @endforeach
+                                             
+                                            </tbody>
+                                        </table>
+                                              
+                                        </div>
+                                          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                            <table class="table text-center">
+                                                <thead>
+                                                  <tr>
+                                                    <th scope="col">CUENTA</th>
+                                                    <th scope="col">NOMBRE DE CUENTA</th>
+                                                    <th scope="col">MONEDA</th>
+                                                    <th scope="col">ACCION</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (listadoMoneda() as  $cuenta12)
+                                                    <tr class="container">
+                                                           <td> {{ $cuenta12->id }}</td>
+                                                           <td>  {{ $cuenta12->name }}</td>
+                                                           <td>  {{ $cuenta12->description }}</td>
+                                                           <td>
+                                                            <button  onclick="mandar(<?php echo $cuenta12->id  ?>, <?php echo $cuenta12->id_moneda ?>,'Moneda')" type="button" tabindex="-2" class="btn btn-primary btn-sm modal-open" data-toggle="modal" data-target="#config">
+                                                                Configuracion
+                                                            </button>
+                                                            </td>
+                                                    </tr>
+                                                    @endforeach
+                                                
+                                                </tbody>
+                                              </table>
+                                        </div>
+                                          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                            <table class="table text-center">
+                                                <thead>
+                                                  <tr>
+                                                    <th scope="col">CUENTA</th>
+                                                    <th scope="col">NOMBRE DE CUENTA</th>
+                                                    <th scope="col">RUBRO AJUSTE</th>
+                                                    <th scope="col">ACCION</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                            @foreach (listadoRubro() as  $cuenta12)
+                                            <tr class="container">
+                                                    <th>{{ $cuenta12->id }}</th>
+                                                    <th>{{ $cuenta12->name }}</th>
+                                                    <th>{{ $cuenta12->description }}</th>
+                                                    <td>
+                                                        <button  onclick="mandar(<?php echo $cuenta12->id  ?>, <?php echo $cuenta12->id_rubro_ajuste ?>,'Rubro')" type="button" tabindex="-2" class="btn btn-primary btn-sm modal-open" data-toggle="modal" data-target="#config">
+                                                            Configuracion
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach 
+                                                 </tbody>
+                                             </table>
+                                        </div>
+                                          <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="detail-tab">
+                                            <table class="table text-center">
+                                                <thead>
+                                                  <tr>
+                                                    <th scope="col">CUENTA</th>
+                                                    <th scope="col">NOMBRE DE CUENTA</th>
+                                                    <th scope="col">FLUJO EFECTIVO</th>
+                                                    <th scope="col">MONEDA</th>
+                                                    <th scope="col">RUBRO AJUSTE</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                            @foreach (listadoAll() as  $cuenta12)
+                                            <tr class="container">
+                                                    <th>{{ $cuenta12->idCuentaPlan }} </th>
+                                                    <th>{{ $cuenta12->descripcion }} </th>
+                                                    <th>{{ $cuenta12->fluName }} </th>
+                                                    <th>{{ $cuenta12->rubName  }} </th>
+                                                    <th>{{ $cuenta12->monName  }}</th>
+                                                </tr>
+                                            @endforeach 
+                                                  </tbody>
+                                              </table>
+                                        </div>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>                             
+                        </div>
+                    </div>
+                </div>
+<!------------------------------------- FIN MODAL LISTADO------------------------------------------------->
+<script>
+// $(document).on("click", ".modal-open", function () {
+//     var foroId= $(this).attr('data-item-foro-id');
+//     $("#foro_id").val(foroId);
+
+// });
+
+
+function mandar(value1,value2,tipo){
+$("#id_plan_new").val(value1);
+
+if(tipo == 'Efectivo') 
+{
+    $("#id_plan_flujo").val(value2);
+    $("#id_moneda").val(null);
+    $("#id_rubro").val(null);
+
+    document.getElementById('numero_1').style.display = 'inline';
+    document.getElementById('numero_2').style.display = 'none';
+    document.getElementById('numero_3').style.display = 'none';
+}
+// }
+if(tipo == 'Moneda') 
+{
+
+    $("#id_moneda").val(value2);
+    $("#id_plan_flujo").val(null);
+    $("#id_rubro").val(null);
+    document.getElementById('numero_1').style.display = 'none';
+    document.getElementById('numero_2').style.display = 'inline';
+    document.getElementById('numero_3').style.display = 'none';
+}
+if(tipo == 'Rubro') 
+{
+    $("#id_rubro").val(value2);
+    $("#id_moneda").val(null);
+    $("#id_plan_flujo").val(null);
+    document.getElementById('numero_1').style.display = 'none';
+    document.getElementById('numero_2').style.display = 'none';
+    document.getElementById('numero_3').style.display = 'inline';
+}
+}
+
+
+
+</script>
+<!------------------------------------- INICIO MODAL CONFIGURAR------------------------------------------------->
+<div   class="modal fade" id="config"  tabindex="-1"  role="dialog"  
+aria-labelledby="modelTitleId" aria-hidden="true" >
+<div  class="modal-dialog" role="document">
+<div   class="modal-content" style="width: 676px !important; margin-top: 47px !important">
+    <div class="modal-header">
+        <h5 class="modal-title">CONFIGURACION DE CUENTA </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form method="POST" action="planUpdate">
+        {{ method_field('PUT') }}
+        {{ csrf_field() }}
+    <div class="modal-body text-left">
+        <div class="form-group">
+            <label for="">Nueva configuracion</label>
+            <input type="hidden" name="id_plan_new" id="id_plan_new" value="">
+            <input type="hidden" name="id_plan_flujo" id="id_plan_flujo" value="">
+            <input type="hidden" name="id_moneda" id="id_moneda" value="">
+            <input type="hidden" name="id_rubro" id="id_rubro" value="">
+        </div>
+
+       <div class="numero_1 row"  id="numero_1" >
+           <div class="col-md-12">
+            <label> listado Flujo</label>
+            <div class="form-group">
+                <select name="id_plan_flujo_new" id="id_plan_flujo_new" class="form-control" >
+                    @foreach(listadoFlujoEfectivo() as $item)
+                        <option value="{{ $item->id_flujo_efectivo }}" >
+                            {{ $item->nombre }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+           </div>
+       </div>
+
+
+
+
+       <div class="numero_2" id="numero_2">
+        Listado Moneda
+        <div class="form-group">
+
+            <select name="id_moneda_new" id="id_moneda_new" class="form-control">
+                @foreach(listadoMonedax() as $item)
+                    <option value="{{ $item->idMoneda }}" >
+                        {{ $item->descripcion }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+       </div>
+
+       <div class="numero_3" id="numero_3">
+        <label>Listado Rubro</label>
+        <div class="form-group">
+
+            <select name="id_rubro_ajuste_new" id="id_rubro_ajuste_new" class="form-control" >
+                @foreach(listadoRubrox() as $item)
+                    <option value="{{ $item->id_rubro_ajuste }}" >
+                        {{ $item->nombre }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+       </div>
+
+       
+
+    </div>
+    <div class="modal-footer">
+        {{-- <button type="button" class="btn btn-primary" >Actualizar</button> --}}
+        <input type="submit" class="btn btn-primary" value="Actualizar"
+    </div>
+</form>
+</div>
+</div>
+</div>
+<!------------------------------------- FIN MODAL CONFIGURAR------------------------------------------------->
+<!------------------------------------- INICIO MODAL CONFIGURAR------------------------------------------------->
+<div class="modal fade" id="config2"  tabindex="-2"  role="dialog"  
+aria-labelledby="modelTitleId" aria-hidden="true" >
+<div  class="modal-dialog" role="document">
+<div   class="modal-content" style="width: 676px !important; margin-top: 47px !important">
+    <div class="modal-header">
+        <h5 class="modal-title">CONFIGURACION DE CUENTA - MONEDA</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form method="POST" action="planUpdate">
+        {{ method_field('PUT') }}
+        {{ csrf_field() }}
+    <div class="modal-body">
+        {{-- <div class="form-group">
+            <label for="">Descripcion</label>
+            <input type="text" name="id_plan2" id="id_plan2" value="">
+            <input type="text" name="id_moneda" id="id_moneda" value="">
+        </div>
+
+        listadoFlujoEfectivo
+        <div class="form-group">
+
+            <select name="id_moneda_new" id="id_moneda_new" >
+                @foreach(listadoFlujoEfectivo() as $item)
+                    <option value="{{ $item->id_flujo_efectivo }}" >
+                        {{ $item->nombre }}
+                    </option>
+                @endforeach
+            </select>
+        </div> --}}
+
+
+    </div>
+    <div class="modal-footer">
+        {{-- <button type="button" class="btn btn-primary" >Actualizar</button> --}}
+        <input type="submit" class="btn btn-primary" value="Actualizar"
+    </div>
+</form>
+</div>
+</div>
+</div>
+<!------------------------------------- FIN MODAL CONFIGURAR------------------------------------------------->
+
                         </div>
                     </div>
                 </div>
@@ -483,7 +805,7 @@
 
                                                                     <div class="form-group">
                                                                         <label for="">Codigo Cuenta</label>
-                                                                        <input type="text" name="" id=""  value="{{$key1+1}}0{{$key2+1}}" class="form-control" placeholder="" aria-describedby="helpId">
+                                                                        <input type="text" name="codigo2" id="codigo2"  value="{{$key1+1}}0{{$key2+1}}" class="form-control" placeholder="" aria-describedby="helpId">
                                                                     </div>
 
                                                                     
@@ -495,7 +817,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button wire:click='update_nuvel2({{$cuenta2->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                                                                    <button wire:click='update_nuvel2(({{$key1+1}}0{{$key2+1}}), {{$cuenta2->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -646,7 +968,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="modal-footer">
-                                                                                    <button wire:click='update_nuvel3({{$cuenta3->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                                                                                    <button wire:click='update_nuvel3(({{$key1+1}}0{{$key2+1}}0{{$key3+1 }}),{{$cuenta3->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -799,7 +1121,7 @@
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div class="modal-footer">
-                                                                                                <button wire:click='update_nuvel4({{$cuenta4->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                                                                                                <button wire:click='update_nuvel4(({{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}),{{$cuenta4->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -887,7 +1209,7 @@
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                             <div class="modal-footer">
-                                                                                                                <button wire:click='update_nuvel5({{$cuenta5->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+                                                                                                                <button wire:click='update_nuvel5(({{$key1+1}}0{{$key2+1}}0{{$key3+1}}0{{$key4+1}}0{{$key5+1}}),{{$cuenta5->idCuentaPlan}})' type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>

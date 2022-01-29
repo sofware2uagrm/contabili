@@ -34,7 +34,46 @@
                         <div id="submenu-6" class="collapse submenu">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('plan.index') }}">Plan De Cuentas</a>
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-4" aria-controls="submenu-1-2">Cuentas</a>
+                                    <div id="submenu-1-4" class="collapse submenu">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('plan.index') }}">Plan De Cuentas</a>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('libro-diario.index') }}">Libro Diario</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('libro-mayor.index') }}">Libro Mayor</a>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('compra.index') }}">Compras</a>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('venta.index') }}">Ventas</a>
+                                            </li>
+                                            
+                                            
+                                            
+                                           
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1-3" aria-controls="submenu-1-2">Contabilidad</a>
+                                    <div id="submenu-1-3" class="collapse submenu">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('comprobante.index') }}">Comprobante</a>
+                                            </li>
+                                          
+                                            
+                                           
+                                        </ul>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
