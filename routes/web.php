@@ -97,6 +97,7 @@ Route::group(['middleware' => 'auth'], function () {
      
 });
 
+Route::put('planUpdate',[CuentaPlanController::class,'editar']);
 Auth::routes();
 
 Route::get('/example',function (){

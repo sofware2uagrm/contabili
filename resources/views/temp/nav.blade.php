@@ -3,6 +3,7 @@
         <a class="navbar-brand" href="{{route('home')}}">ICONTABSAYUBU {{date("Y")}}</a>
         <h3>Actual Empresa Razon Social:</h3> <h2>{{session('nombre')}}       :</h2>
         <a class="btn btn-secondary" href="{{ route('acempresas.index') }}">Cambiar Empresa</a>
+      
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

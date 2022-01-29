@@ -244,35 +244,36 @@ class Index extends Component
 
 
     public function update_nuvel1($idCuentaPlanTipo){
+        dd($idCuentaPlanTipo);
         $cuenta = CuentaPlanTipo::findOrFail($idCuentaPlanTipo);
         $cuenta->descripcion = $this->descripcion_nivel1;
         $cuenta->update();
     }
 
-    public function update_nuvel2($idCuentaPlan){
+    public function update_nuvel2($codigo,$idCuentaPlan){
         $cuenta = CuentaPlan::findOrFail($idCuentaPlan);
         $cuenta->descripcion = $this->descripcion_nivel2;
-        $cuenta->codigo = $this->codigo2;
+        $cuenta->codigo = $codigo;
         $cuenta->update();
     }
-    public function update_nuvel3($idCuentaPlan){
+    public function update_nuvel3($codigo,$idCuentaPlan){
         $cuenta = CuentaPlan::findOrFail($idCuentaPlan);
         $cuenta->descripcion = $this->descripcion_nivel3;
-        $cuenta->codigo = $this->codigo3;
+        $cuenta->codigo = $codigo;
         $cuenta->update();
     }
 
-    public function update_nuvel4($idCuentaPlan){
+    public function update_nuvel4($codigo,$idCuentaPlan){
         $cuenta = CuentaPlan::findOrFail($idCuentaPlan);
         $cuenta->descripcion = $this->descripcion_nivel4;
-        $cuenta->codigo = $this->codigo4;
+        $cuenta->codigo = $codigo;
         $cuenta->update();
     }
 
-    public function update_nuvel5($idCuentaPlan){
+    public function update_nuvel5($codigo,$idCuentaPlan){
         $cuenta = CuentaPlan::findOrFail($idCuentaPlan);
         $cuenta->descripcion = $this->descripcion_nivel5;
-        $cuenta->codigo = $this->codigo5;
+        $cuenta->codigo = $codigo;
         $cuenta->update();
     }
 
