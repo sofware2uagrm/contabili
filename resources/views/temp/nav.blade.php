@@ -1,6 +1,6 @@
 <div class="dashboard-header">
     <nav class="navbar navbar-expand-lg bg-white fixed-top">
-        <a class="navbar-brand text-md-start" href="{{route('home')}}">ICONTABSAYUBU {{date("Y")}}</a>
+        <a class="navbar-brand text-md-start" href="{{route('home')}}">CONTABSAYUBU {{date("Y")}}</a>
         <h3 class="text-md-start">Actual Empresa Razon Social:</h3> <h2>{{session('nombre')}} </h2>
         <a class="btn btn-primary" href="{{ route('acempresas.index') }}">Cambiar Empresa</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

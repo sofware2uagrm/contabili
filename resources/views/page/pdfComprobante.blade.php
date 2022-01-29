@@ -7,43 +7,35 @@
     <title>Document</title>
 </head>
 <style>
-    *{
-        padding: 0;
-        margin: 0;
-    }
     .contenedor{
-        margin: 20px;
+        margin: 100%;
     }
-    .comprobante{
-        border:1px solid black;
-        padding:10px;
-        width: 100%;
-        height: 100px;
-    }
-
-
-
+   
     .table, td, th {
     border: 1px solid black;
     }
-
     .table {
     width: 100%;
     border-collapse: collapse;
     }
 </style>
 </head>
-<body>
+<body>  
+        <div class="derecha">
+         EMPRESA:<br>
+         DIRECCIÓN:<br>
+         NIT: <br>
+        </div>
 </style>
 <body>
-    <div class="contenedor">
-        <div style="height: 80px; width: 100%; margin: auto" >
-            <h2>Libro Diario</h2>
-        </div>
+   
+  <div style="height: 80px; width: 100%; margin: centrado" >
+                      <h2>LIBRO DIARIO</h2>
+                                  
         @foreach ($comprobantes as $comprobante)
            
             <div class="comprobante">
-                <p>Comprobante {{$comprobante->idComprobante}}</p>
+                <p> <h2>Comprobante{{$comprobante->idComprobante}}</h2></p>
                 <div class="card-body">
                     <table class="table">
                         <thead>
